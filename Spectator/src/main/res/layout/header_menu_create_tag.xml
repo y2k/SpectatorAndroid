@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/createTag"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector_holo_dark"
+    android:clickable="true"
+    android:drawablePadding="@dimen/small_padding"
+    android:gravity="center_vertical"
+    android:minHeight="50dip"
+    android:onClick="onClick"
+    android:paddingLeft="@dimen/large_padding"
+    android:text="[ Create tag ]"
+    android:textAppearance="?android:attr/textAppearanceMedium" />

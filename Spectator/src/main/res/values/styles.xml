@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="@style/AppThemeBase"></style>
+
+    <style name="AppTheme.Overlay">
+        <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <style name="AppStyle"></style>
+
+    <style name="AppStyle.InformationItem">
+        <item name="android:autoLink">web</item>
+        <item name="android:layout_margin">@dimen/normal_padding</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily" tools:targetApi="16">sans-serif-light</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/feed"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/menu_selector"
+    android:drawablePadding="@dimen/small_padding"
+    android:gravity="center_vertical"
+    android:minHeight="48dip"
+    android:paddingLeft="@dimen/small_padding"
+    android:text="@string/menu_feed"
+    android:textAppearance="?android:attr/textAppearanceMedium" />

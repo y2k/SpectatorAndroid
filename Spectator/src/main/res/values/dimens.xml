@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="small_padding">4dip</dimen>
+    <dimen name="normal_padding">8dip</dimen>
+    <dimen name="large_padding">16dip</dimen>
+    <dimen name="feed_icon">46dip</dimen>
+    <dimen name="tag_icon">50dip</dimen>
+    <dimen name="slide_menu_width">280dip</dimen>
+    <dimen name="subscription_panel_width">280dip</dimen>
+
+    <item name="checkbox" type="id"/>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+
+</resources>

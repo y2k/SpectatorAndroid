@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#2666"
+    android:paddingBottom="1dp"
+    android:paddingRight="1dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white" >
+
+        <ImageView
+            android:id="@+id/subscriptionIcon"
+            android:layout_width="@dimen/feed_icon"
+            android:layout_height="@dimen/feed_icon"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="1dp"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/stash"
+            android:layout_width="@dimen/feed_icon"
+            android:layout_height="@dimen/feed_icon"
+            android:layout_alignParentRight="true"
+            android:background="?android:attr/listChoiceBackgroundIndicator"
+            android:clickable="true"
+            android:scaleType="center" />
+
+        <View
+            android:id="@+id/subscriptionButton"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/feed_icon"
+            android:layout_toLeftOf="@id/stash"
+            android:background="?android:attr/listChoiceBackgroundIndicator"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="150dip"
+            android:layout_below="@id/subscriptionIcon"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/subscriptionIcon"
+            android:layout_toLeftOf="@id/stash"
+            android:layout_toRightOf="@+id/subscriptionIcon"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:includeFontPadding="false"
+            android:paddingTop="4dp"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/subscriptionIcon"
+            android:layout_toLeftOf="@id/stash"
+            android:layout_toRightOf="@+id/subscriptionIcon"
+            android:fontFamily="sans-serif-light"
+            android:paddingBottom="4dp"
+            android:textColor="#888"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+</FrameLayout>

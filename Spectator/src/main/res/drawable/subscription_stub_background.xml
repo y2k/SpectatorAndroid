@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <size
+                android:height="48dp"
+                android:width="48dp" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/bg_stripes_dark_drawable"/>
+
+</layer-list>

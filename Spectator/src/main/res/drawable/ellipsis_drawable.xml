@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+
+    <item
+        android:drawable="@drawable/ellipsis_19"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_20"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_21"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_22"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_23"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_24"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_25"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_26"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_27"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_28"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_29"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_30"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_31"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_32"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_33"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_34"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_35"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_36"
+        android:duration="50"/>
+    <item
+        android:drawable="@drawable/ellipsis_37"
+        android:duration="50"/>
+
+</animation-list>

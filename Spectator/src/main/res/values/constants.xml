@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="screenshot_thumbnail">150dp</dimen>
+    <dimen name="image_snapshot_thumbnail">150dp</dimen>
+
+    <color name="window_background">#ddd</color>
+    <color name="left_menu_background">#ddd</color>
+    <color name="image_stub_background">#e8e8e8</color>
+
+</resources>

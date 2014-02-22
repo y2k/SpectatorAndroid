@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_menu"
+        android:textAppearance="?android:attr/textAppearance" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginRight="@dimen/large_padding"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/feed"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/list_selector_holo_dark"
+        android:drawableLeft="@drawable/ic_youtube"
+        android:drawablePadding="@dimen/small_padding"
+        android:gravity="center_vertical"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/small_padding"
+        android:text="@string/menu_feed"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/subscriptions"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/list_selector_holo_dark"
+        android:drawableLeft="@drawable/ic_youtube"
+        android:drawablePadding="@dimen/small_padding"
+        android:gravity="center_vertical"
+        android:onClick="onClick"
+        android:paddingLeft="@dimen/small_padding"
+        android:text="@string/menu_subscriptions"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_tags"
+        android:textAppearance="?android:attr/textAppearance" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginRight="@dimen/large_padding"
+        android:background="@android:color/darker_gray" />
+
+</LinearLayout>

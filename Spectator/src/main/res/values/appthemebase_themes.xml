@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppThemeBase" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowBackground">@color/window_background</item>
+    </style>
+
+    <style name="SpectatorActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">#222</item>
+    </style>
+
+</resources>

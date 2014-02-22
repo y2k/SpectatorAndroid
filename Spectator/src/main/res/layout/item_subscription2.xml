@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.itwister.spectator.view.common.CheckedLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/groupTitle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/left_menu_background"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/small_padding"
+            android:paddingLeft="@dimen/large_padding"
+            android:textAllCaps="true"
+            android:textColor="#666"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#AAAA" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="@dimen/small_padding"
+        android:layout_marginTop="@dimen/small_padding"
+        android:gravity="center_vertical" >
+
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" >
+
+            <View
+                android:id="@+id/stub"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/image_stub_background" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/item_subscription_selector"
+            android:drawablePadding="@dimen/normal_padding"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#444"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#444"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="#CCCC" />
+
+</net.itwister.spectator.view.common.CheckedLinearLayout>

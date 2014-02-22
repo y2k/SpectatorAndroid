@@ -1,0 +1,123 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.itwister.spectator">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="false"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- Разрешения для GCM -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <!-- / END -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <!-- Flurry -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- / END -->
+
+    <permission
+        android:name="net.itwister.spectator.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="net.itwister.spectator.permission.C2D_MESSAGE" />
+
+    <application
+        android:name="net.itwister.spectator.App"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="net.itwister.spectator.view.home.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:windowSoftInputMode="adjustPan" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.itwister.spectator.view.createsubscription.CreateSubscriptionActivity"
+            android:label="@string/title_subscription_editor" />
+        <activity android:name="net.itwister.spectator.view.viewsnapshot.ViewSnapshotActivity" />
+        <activity
+            android:name="net.itwister.spectator.view.subscriptions.SubscriptionListActivity"
+            android:label="@string/title_subscriptions" />
+        <activity android:name="net.itwister.spectator.view.snapshots.SnapshotListActivity" />
+        <activity android:name="net.itwister.spectator.view.account.AccountActivity" />
+        <activity
+            android:name="net.itwister.spectator.view.settings.SettingsActivity"
+            android:label="@string/title_settings" >
+        </activity>
+        <activity
+            android:name="net.itwister.spectator.view.viewsnapshot.PagerSnapshotActivity"
+            android:label=""
+            android:theme="@style/AppTheme.Overlay" >
+        </activity>
+        <activity
+            android:name="net.itwister.spectator.view.screenshots.ScreenshotsActivity"
+            android:theme="@style/AppTheme.Overlay" >
+        </activity>
+        <activity android:name="net.itwister.spectator.view.stash.StashActivity" >
+        </activity>
+        <activity
+            android:name=".view.viewsnapshot.SnapshotViewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.Overlay" >
+        </activity>
+
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="net.itwister.spectator" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="net.itwister.spectator.GCMIntentService" />
+        <service android:name="net.itwister.spectator.services.SyncService" />
+
+        <!-- Виджет -->
+
+        <activity android:name="net.itwister.spectator.widget.SubscriptionWidgetConfigureActivity" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name="net.itwister.spectator.widget.SubscriptionWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/subscription_widget_info" />
+        </receiver>
+
+        <service
+            android:name="net.itwister.spectator.widget.SubscriptionWidgetAdapterService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service android:name="net.itwister.spectator.widget.SubscriptionWidget$SyncWidgetService" />
+        <!-- /Виджет -->
+    </application>
+
+</manifest>
