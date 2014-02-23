@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bindui">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Spectator/libs/bindui.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
