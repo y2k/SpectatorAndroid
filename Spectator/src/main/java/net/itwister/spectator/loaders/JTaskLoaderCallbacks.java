@@ -9,7 +9,7 @@ import android.support.v4.content.Loader;
 
 import net.itwister.spectator.loaders.JTaskLoader;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public class JTaskLoaderCallbacks<D> implements LoaderCallbacks<D> {
 

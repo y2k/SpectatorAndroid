@@ -8,7 +8,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import net.itwister.spectator.App;
 import net.itwister.tools.inner.Ln;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public class JTaskCursorLoader extends AsyncTaskLoader<Cursor> {
 

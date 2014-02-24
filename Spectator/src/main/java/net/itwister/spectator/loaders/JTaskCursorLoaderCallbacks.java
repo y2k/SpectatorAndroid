@@ -10,7 +10,7 @@ import android.support.v4.widget.CursorAdapter;
 
 import net.itwister.spectator.loaders.JTaskCursorLoader;
 
-import bindui.Task;
+import bindui.extra.Task;
 import bindui.adapters.UICursorPagerAdapter;
 
 public class JTaskCursorLoaderCallbacks implements LoaderCallbacks<Cursor> {

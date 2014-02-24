@@ -9,8 +9,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
 import android.os.SystemClock;
-import bindui.Task;
-import bindui.Task.TaskCallback;
+import bindui.extra.Task;
+import bindui.extra.Task.TaskCallback;
 
 class GifDrawable extends ZoomImageDrawable {
 

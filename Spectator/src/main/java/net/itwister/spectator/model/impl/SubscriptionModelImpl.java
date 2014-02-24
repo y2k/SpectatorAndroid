@@ -21,7 +21,7 @@ import net.itwister.spectator.model.helpers.SpectatorTask;
 import net.itwister.spectator.model.web.SpectatorWebClient;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
-import bindui.Task;
+import bindui.extra.Task;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;

@@ -7,7 +7,7 @@ import net.itwister.spectator.data.WebContent;
 import net.itwister.spectator.data.generic.SnapshotWrapper;
 import net.itwister.spectator.model.SyncModel.SyncObject;
 import android.database.Cursor;
-import bindui.Task;
+import bindui.extra.Task;
 
 public interface SnapshotModel {
 

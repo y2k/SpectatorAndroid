@@ -21,7 +21,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 
-import bindui.Task;
+import bindui.extra.Task;
 import bindui.annotations.InjectView;
 
 public class CreateSubscriptionDialogFragment extends SpectatorDialogFragment implements OnClickListener {

@@ -14,7 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import android.net.Uri;
-import bindui.Task;
+import bindui.extra.Task;
 
 @Singleton
 public class RssModelImpl implements RssModel {

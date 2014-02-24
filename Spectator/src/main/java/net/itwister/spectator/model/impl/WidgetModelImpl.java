@@ -31,7 +31,7 @@ import android.os.ParcelFileDescriptor;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 @Singleton
 public class WidgetModelImpl implements WidgetModel {

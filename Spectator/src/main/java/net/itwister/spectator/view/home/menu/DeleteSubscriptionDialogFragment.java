@@ -15,7 +15,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public class DeleteSubscriptionDialogFragment extends SpectatorDialogFragment {
 

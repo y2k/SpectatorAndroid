@@ -28,7 +28,7 @@ import android.os.Handler;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.InboxStyle;
 import android.support.v4.content.LocalBroadcastManager;
-import bindui.Task.TaskCallback;
+import bindui.extra.Task.TaskCallback;
 
 @Singleton
 public class SyncModelImpl implements SyncModel {

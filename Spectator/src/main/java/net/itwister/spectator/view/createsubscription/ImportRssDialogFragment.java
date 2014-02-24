@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
-import bindui.Task;
+import bindui.extra.Task;
 import bindui.annotations.InjectView;
 
 public class ImportRssDialogFragment extends SpectatorDialogFragment {

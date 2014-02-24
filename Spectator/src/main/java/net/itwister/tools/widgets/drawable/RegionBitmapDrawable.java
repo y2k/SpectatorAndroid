@@ -17,8 +17,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.os.SystemClock;
-import bindui.Task;
-import bindui.Task.TaskCallback;
+import bindui.extra.Task;
+import bindui.extra.Task.TaskCallback;
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD_MR1)
 class RegionBitmapDrawable extends ZoomImageDrawable {

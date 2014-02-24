@@ -2,7 +2,7 @@ package net.itwister.spectator.model.helpers;
 
 import android.content.Context;
 import bindui.InjectService;
-import bindui.Task;
+import bindui.extra.Task;
 
 public abstract class SpectatorTask<ResultT> extends Task<ResultT> {
 

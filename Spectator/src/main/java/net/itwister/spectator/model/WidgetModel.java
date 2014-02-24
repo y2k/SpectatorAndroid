@@ -4,7 +4,7 @@ import net.itwister.spectator.model.helpers.SpectatorTask;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public interface WidgetModel {
 

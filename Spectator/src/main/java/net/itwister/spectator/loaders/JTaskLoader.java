@@ -5,7 +5,7 @@ import android.support.v4.content.AsyncTaskLoader;
 
 import net.itwister.spectator.App;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public class JTaskLoader<D> extends AsyncTaskLoader<D> {
 

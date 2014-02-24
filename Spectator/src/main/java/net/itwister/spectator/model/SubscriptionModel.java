@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.itwister.spectator.data.Subscription;
 import android.database.Cursor;
-import bindui.Task;
+import bindui.extra.Task;
 
 public interface SubscriptionModel {
 

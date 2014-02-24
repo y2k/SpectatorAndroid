@@ -8,7 +8,7 @@ import net.itwister.spectator.model.SyncModel;
 import net.itwister.spectator.model.web.SpectatorWebClient;
 import net.itwister.tools.inner.Ln;
 import android.content.Intent;
-import bindui.Task;
+import bindui.extra.Task;
 
 @Singleton
 public class GcmModelImpl implements GcmModel {

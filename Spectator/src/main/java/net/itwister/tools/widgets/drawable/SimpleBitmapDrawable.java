@@ -5,8 +5,8 @@ import java.io.File;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import bindui.Task;
-import bindui.Task.TaskCallback;
+import bindui.extra.Task;
+import bindui.extra.Task.TaskCallback;
 
 class SimpleBitmapDrawable extends ZoomImageDrawable {
 

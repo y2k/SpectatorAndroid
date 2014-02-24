@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
-import bindui.Task;
+import bindui.extra.Task;
 
 public class StashModelImpl extends SpectatorModel implements StashModel {
 

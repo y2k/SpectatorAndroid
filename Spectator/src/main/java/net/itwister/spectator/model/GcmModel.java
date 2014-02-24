@@ -1,7 +1,7 @@
 package net.itwister.spectator.model;
 
 import android.content.Intent;
-import bindui.Task;
+import bindui.extra.Task;
 
 public interface GcmModel {
 

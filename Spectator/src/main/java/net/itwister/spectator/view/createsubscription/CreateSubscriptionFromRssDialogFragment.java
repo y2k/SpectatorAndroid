@@ -21,8 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
-import bindui.Task;
-import bindui.Task.TaskCallback;
+import bindui.extra.Task;
+import bindui.extra.Task.TaskCallback;
 import bindui.annotations.InjectView;
 
 public class CreateSubscriptionFromRssDialogFragment extends SpectatorDialogFragment {

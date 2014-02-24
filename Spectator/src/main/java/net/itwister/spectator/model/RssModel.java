@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import android.net.Uri;
 import android.text.TextUtils;
-import bindui.Task;
+import bindui.extra.Task;
 
 public interface RssModel {
 
