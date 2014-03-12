@@ -1,35 +1,12 @@
 package net.itwister.spectator.view.home.feed;
 
-import javax.inject.Inject;
-
-import net.itwister.spectator.Constants;
-import net.itwister.spectator.R;
-import net.itwister.spectator.broadcast.SearchReceiver;
-import net.itwister.spectator.data.Snapshot;
-
-import net.itwister.spectator.loaders.JTaskCursorLoaderCallbacks;
-import net.itwister.spectator.model.AnalyticsModel;
-import net.itwister.spectator.model.ImageModel;
-import net.itwister.spectator.model.SnapshotModel;
-import net.itwister.spectator.model.StashModel;
-import net.itwister.spectator.model.SyncModel;
-import net.itwister.spectator.model.SyncModel.SyncObject;
-import net.itwister.spectator.view.common.P2;
-import net.itwister.spectator.view.common.base.SpectatorFragment;
-import net.itwister.spectator.view.helpers.Fragments;
-import net.itwister.spectator.view.helpers.UiHelper;
-import net.itwister.spectator.view.home.menu.MenuFragment.MenuFragmentHost;
-import net.itwister.spectator.view.viewsnapshot.PagerSnapshotActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
@@ -44,9 +21,26 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.itwister.spectator.Constants;
+import net.itwister.spectator.R;
+import net.itwister.spectator.broadcast.SearchReceiver;
+import net.itwister.spectator.data.Snapshot;
+import net.itwister.spectator.loaders.JTaskCursorLoaderCallbacks;
+import net.itwister.spectator.model.AnalyticsModel;
+import net.itwister.spectator.model.ImageModel;
+import net.itwister.spectator.model.SnapshotModel;
+import net.itwister.spectator.model.StashModel;
+import net.itwister.spectator.model.SyncModel;
+import net.itwister.spectator.model.SyncModel.SyncObject;
+import net.itwister.spectator.view.common.base.SpectatorFragment;
+import net.itwister.spectator.view.helpers.Fragments;
+import net.itwister.spectator.view.viewsnapshot.PagerSnapshotActivity;
+
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
+
+import javax.inject.Inject;
 
 import bindui.UICursorViewTemplate;
 import bindui.adapters.UICursorAdapter;
@@ -236,17 +230,17 @@ public class FeedFragment extends SpectatorFragment {
     @ContentView(R.layout.item_feed)
     public static class FeedItemTemplate extends UICursorViewTemplate {
 
+        private @InjectView(R.id.title)             TextView text;
+        private @InjectView(R.id.date)              TextView date;
+        private @InjectView(R.id.image)             ImageView image;
+        private @InjectView(R.id.subscriptionIcon)  ImageView subIconView;
+        private @InjectView(R.id.stash)             ImageView stash;
+
+        private @Inject ImageModel imageModel;
+        private @Inject StashModel stashModel;
+
+        private PrettyTime pTime = new PrettyTime();
         private int iconSize;
-
-        //        @InjectView(R.id.subscriptionButton) View subscriptionButton;
-        @InjectView(R.id.title)             TextView text;
-        @InjectView(R.id.date)              TextView date;
-        @InjectView(R.id.image)             ImageView image;
-        @InjectView(R.id.subscriptionIcon)  ImageView subIconView;
-        @InjectView(R.id.stash)             ImageView stash;
-
-        @Inject ImageModel imageModel;
-        @Inject StashModel stashModel;
 
         @Override
         public View onNewView(Context context) {
@@ -272,7 +266,7 @@ public class FeedFragment extends SpectatorFragment {
             Cursor c = cursor;
 
             h.text.setText(c.getString(c.getColumnIndex(Snapshot.TITLE)));
-            h.date.setText(new PrettyTime().format(new Date(c.getLong(c.getColumnIndex(Snapshot.CREATED)))));
+            h.date.setText(pTime.format(new Date(c.getLong(c.getColumnIndex(Snapshot.CREATED)))));
 
             {
 //                viewsPendingImage.remove(h.image);

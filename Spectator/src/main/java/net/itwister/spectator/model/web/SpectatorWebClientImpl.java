@@ -1,27 +1,34 @@
 package net.itwister.spectator.model.web;
 
+import com.squareup.okhttp.OkHttpClient;
+
+import net.itwister.spectator.App;
+import net.itwister.spectator.Constants;
+import net.itwister.spectator.model.account.PermanentCookieStorage;
+
+import org.apache.http.client.CookieStore;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.cookie.BasicClientCookie;
+
+import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyStore;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Singleton;
-import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import net.itwister.spectator.App;
-import net.itwister.spectator.Constants;
-import net.itwister.spectator.model.account.PermanentCookieStorage;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
 
 import retrofit.RestAdapter;
 import retrofit.client.Header;
@@ -31,12 +38,6 @@ import retrofit.client.Response;
 import retrofit.converter.ConversionException;
 import retrofit.converter.ProtoConverter;
 import retrofit.mime.TypedInput;
-
-import com.squareup.okhttp.OkHttpClient;
-
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 @Singleton
 public class SpectatorWebClientImpl implements SpectatorWebClient {
@@ -66,36 +67,80 @@ public class SpectatorWebClientImpl implements SpectatorWebClient {
 		return client.open(url);
 	}
 
-	private void initializeSsl() {
+//	private void initializeSsl() {
+//        try {
+//            final SSLContext context = SSLContext.getInstance("TLS");
+//            final KeyStore keystore = KeyStore.getInstance("PKCS12");
+//            keystore.load(App.getInstance().getAssets().open("certificate.pfx"), "1".toCharArray());
+//            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+//            keyManagerFactory.init(keystore, "1".toCharArray());
+//            context.init(keyManagerFactory.getKeyManagers(), new TrustManager[] { new X509TrustManager() {
+//
+//                @Override
+//                public void checkClientTrusted(final X509Certificate[] arg0, final String arg1) throws CertificateException {
+//                    // TODO Auto-generated method stub
+//                }
+//
+//                @Override
+//                public void checkServerTrusted(final X509Certificate[] arg0, final String arg1) throws CertificateException {
+//                    // TODO Auto-generated method stub
+//                }
+//
+//                @Override
+//                public X509Certificate[] getAcceptedIssuers() {
+//                    return new X509Certificate[] {};
+//                }
+//            } }, new SecureRandom());
+//
+//            client.setSslSocketFactory(context.getSocketFactory());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    private void initializeSsl() {
         try {
-            final SSLContext context = SSLContext.getInstance("TLS");
-            final KeyStore keystore = KeyStore.getInstance("PKCS12");
-            keystore.load(App.getInstance().getAssets().open("certificate.pfx"), "1".toCharArray());
-            final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-            keyManagerFactory.init(keystore, "1".toCharArray());
-            context.init(keyManagerFactory.getKeyManagers(), new TrustManager[] { new X509TrustManager() {
+            CertificateFactory cf = CertificateFactory.getInstance("X.509");
+            InputStream caInput = new BufferedInputStream(App.getInstance().getAssets().open("ssl/spectator.server.crt"));
+            Certificate ca;
+            try {
+                ca = cf.generateCertificate(caInput);
+            } finally {
+                caInput.close();
+            }
+
+            // Create a KeyStore containing our trusted CAs
+            String keyStoreType = KeyStore.getDefaultType();
+            KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+            keyStore.load(null, null);
+            keyStore.setCertificateEntry("ca", ca);
+
+            // Create a TrustManager that trusts the CAs in our KeyStore
+            String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+            tmf.init(keyStore);
+
+            // Create an SSLContext that uses our TrustManager
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, tmf.getTrustManagers(), null);
+
+            HostnameVerifier hostnameVerifier = new HostnameVerifier() {
 
                 @Override
-                public void checkClientTrusted(final X509Certificate[] arg0, final String arg1) throws CertificateException {
-                    // TODO Auto-generated method stub
+                public boolean verify(String hostname, SSLSession session) {
+                    //				HostnameVerifier hv = HttpsURLConnection.getDefaultHostnameVerifier();
+                    //				return hv.verify("gsapi-dev.myplaycity.com", session);
+                    return true; // TODO Добавить проверку на хост
                 }
+            };
 
-                @Override
-                public void checkServerTrusted(final X509Certificate[] arg0, final String arg1) throws CertificateException {
-                    // TODO Auto-generated method stub
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[] {};
-                }
-            } }, new SecureRandom());
-
+            client.setHostnameVerifier(hostnameVerifier);
             client.setSslSocketFactory(context.getSocketFactory());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private static class VoidProtoConverter extends ProtoConverter {
 
