@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+
     private val counterStore = CounterStore()
 
     override fun onCreate(savedInstanceState: Bundle?) {
