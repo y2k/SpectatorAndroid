@@ -23,7 +23,7 @@ object ServiceLocator : BaseServiceLocator() {
     private class StubNavigationService : NavigationService {
 
         override fun navigateToMain() {
-            throw UnsupportedOperationException()
+            // TODO:
         }
     }
 }
