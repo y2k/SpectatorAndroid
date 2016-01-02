@@ -8,43 +8,44 @@ import android.os.Bundle
 /**
  * Created by y2k on 1/2/16.
  */
-class AndroidNavigationService(app: Application) : NavigationService, Application.ActivityLifecycleCallbacks {
+class AndroidNavigationService(app: Application) : NavigationService {
 
-    var activity: Activity? = null
+    var context: Activity? = null
 
     init {
-        app.registerActivityLifecycleCallbacks(this)
+        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+
+            override fun onActivityResumed(activity: Activity?) {
+                context = activity
+            }
+
+            override fun onActivityPaused(activity: Activity?) {
+                context = null
+            }
+
+            override fun onActivityStarted(activity: Activity?) {
+            }
+
+            override fun onActivityDestroyed(activity: Activity?) {
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+            }
+
+            override fun onActivityStopped(activity: Activity?) {
+            }
+
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            }
+        })
     }
 
     override fun navigateToLogin() {
-        activity?.startActivity(Intent(activity, LoginActivity::class.java))
+        context?.startActivity(Intent(context, LoginActivity::class.java))
     }
 
     override fun navigateToMain() {
-        activity?.startActivity(Intent(activity, MainActivity::class.java)
+        context?.startActivity(Intent(context, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK + Intent.FLAG_ACTIVITY_NEW_TASK))
-    }
-
-    override fun onActivityResumed(activity: Activity?) {
-        this.activity = activity
-    }
-
-    override fun onActivityPaused(activity: Activity?) {
-        this.activity = null
-    }
-
-    override fun onActivityStarted(activity: Activity?) {
-    }
-
-    override fun onActivityDestroyed(activity: Activity?) {
-    }
-
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
-    }
-
-    override fun onActivityStopped(activity: Activity?) {
-    }
-
-    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
     }
 }
