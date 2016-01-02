@@ -1,0 +1,7 @@
+.gradle
+.idea
+android/build
+core/build
+ios/robovm-build
+*.iml
+local.properties
