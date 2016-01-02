@@ -16,6 +16,10 @@ class AndroidNavigationService(app: Application) : NavigationService, Applicatio
         app.registerActivityLifecycleCallbacks(this)
     }
 
+    override fun navigateToLogin() {
+        activity?.startActivity(Intent(activity, LoginActivity::class.java))
+    }
+
     override fun navigateToMain() {
         activity?.startActivity(Intent(activity, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK + Intent.FLAG_ACTIVITY_NEW_TASK))

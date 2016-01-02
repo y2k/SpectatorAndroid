@@ -11,7 +11,25 @@ import android.view.ViewGroup
  */
 class SnapshotListFragment : Fragment() {
 
+    lateinit var presenter: SnapshotsPresenter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_snapshots, container, false)
+        val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
+
+        presenter = ServiceLocator.instance.resolveSnapshotsPresenter(
+                object : SnapshotsPresenter.View {
+
+                    val login = view.findViewById(R.id.login)
+
+                    init {
+                        login.setOnClickListener { presenter.login() }
+                    }
+
+                    override fun showLogin() {
+                        login.visibility = View.VISIBLE
+                    }
+                })
+
+        return view
     }
 }

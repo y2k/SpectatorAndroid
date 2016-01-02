@@ -7,6 +7,12 @@ import rx.Scheduler
  */
 abstract class BaseServiceLocator {
 
+    fun resolveSnapshotsPresenter(view: SnapshotsPresenter.View): SnapshotsPresenter {
+        return SnapshotsPresenter(view,
+                resolveNavigationService(),
+                resolveScheduler())
+    }
+
     fun resolveLoginPresenter(view: LoginPresenter.View): LoginPresenter {
         return LoginPresenter(view,
                 resolveNavigationService(),

@@ -6,4 +6,6 @@ package y2k.spectator
 interface NavigationService {
 
     fun navigateToMain()
+
+    fun navigateToLogin()
 }
