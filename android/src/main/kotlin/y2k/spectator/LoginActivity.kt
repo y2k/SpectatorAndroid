@@ -2,6 +2,7 @@ package y2k.spectator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
@@ -41,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun setBusy(isBusy: Boolean) {
+                progress.visibility = View.VISIBLE
                 progress.animate().alpha(if (isBusy) 1f else 0f)
             }
         })
