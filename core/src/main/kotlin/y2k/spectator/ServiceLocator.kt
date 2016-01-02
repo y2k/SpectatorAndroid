@@ -5,18 +5,20 @@ import rx.Scheduler
 /**
  * Created by y2k on 1/2/16.
  */
-abstract class BaseServiceLocator {
+object ServiceLocator {
+
+    lateinit var platform: Platform
 
     fun resolveSnapshotsPresenter(view: SnapshotsPresenter.View): SnapshotsPresenter {
         return SnapshotsPresenter(view,
-                resolveNavigationService(),
-                resolveScheduler())
+                platform.resolveNavigationService(),
+                platform.resolveScheduler())
     }
 
     fun resolveLoginPresenter(view: LoginPresenter.View): LoginPresenter {
         return LoginPresenter(view,
-                resolveNavigationService(),
-                resolveScheduler(),
+                platform.resolveNavigationService(),
+                platform.resolveScheduler(),
                 resolveAccountService())
     }
 
@@ -24,7 +26,8 @@ abstract class BaseServiceLocator {
         return AccounService()
     }
 
-    protected abstract fun resolveScheduler(): Scheduler
-
-    protected abstract fun resolveNavigationService(): NavigationService
+    interface Platform {
+        fun resolveScheduler(): Scheduler
+        fun resolveNavigationService(): NavigationService
+    }
 }
