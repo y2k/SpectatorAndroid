@@ -1,5 +1,6 @@
 package y2k.spectator
 
+import android.app.Application
 import android.os.Handler
 import rx.Scheduler
 import rx.schedulers.Schedulers
@@ -7,23 +8,22 @@ import rx.schedulers.Schedulers
 /**
  * Created by y2k on 1/2/16.
  */
-object ServiceLocator : BaseServiceLocator() {
+class ServiceLocator(private val app: Application) : BaseServiceLocator() {
 
     private val handler = Handler()
     private val scheduler = Schedulers.from { handler.post(it) }
+    private val navigationService = AndroidNavigationService(app)
 
     override fun resolveScheduler(): Scheduler {
         return scheduler
     }
 
     override fun resolveNavigationService(): NavigationService {
-        return StubNavigationService()
+        return navigationService
     }
 
-    private class StubNavigationService : NavigationService {
+    companion object {
 
-        override fun navigateToMain() {
-            // TODO:
-        }
+        lateinit var instance: ServiceLocator
     }
 }

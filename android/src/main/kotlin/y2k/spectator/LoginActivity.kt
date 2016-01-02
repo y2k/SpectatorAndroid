@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        presenter = ServiceLocator.resolveLoginPresenter(object : LoginPresenter.View {
+        presenter = ServiceLocator.instance.resolveLoginPresenter(object : LoginPresenter.View {
 
             val webView = findViewById(R.id.webView) as WebView
             val progress = findViewById(R.id.progress)
