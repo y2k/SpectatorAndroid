@@ -1,0 +1,22 @@
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="y2k.spectator.MainActivity">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <fragment android:id="@+id/container"
+                  android:name="y2k.spectator.SnapshotListFragment"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
+    </LinearLayout>
+    <fragment android:id="@+id/navigation_drawer"
+              android:layout_width="280dp"
+              android:layout_height="match_parent"
+              android:layout_gravity="start"
+              android:name="y2k.spectator.MenuFragment"/>
+</android.support.v4.widget.DrawerLayout>
