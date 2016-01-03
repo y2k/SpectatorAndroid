@@ -22,6 +22,10 @@ interface Api {
 
     @GET("subscriptions")
     fun subscriptions(): Observable<SubscriptionResponse>
+
+    @PUT("account")
+    @FormUrlEncoded
+    fun login(@Field("code") code: String, @Field("redirectUri") redirectUri: String): Observable<Unit>
 }
 
 class SubscriptionResponse {

@@ -1,6 +1,7 @@
 package y2k.spectator
 
 import rx.Scheduler
+import rx.schedulers.Schedulers
 import y2k.spectator.common.findGroup
 import java.net.URLDecoder
 
@@ -11,7 +12,7 @@ class LoginPresenter(
         private val view: LoginPresenter.View,
         private val navigationService: NavigationService,
         private val uiScheduler: Scheduler,
-        private val accounService: AccounService) {
+        private val api: Api) {
 
     init {
         view.loadUrl("https://accounts.google.com/o/oauth2/auth?" +
@@ -25,8 +26,8 @@ class LoginPresenter(
     fun acceptPage(title: String?) {
         val code = title.findGroup("code=(.+)") ?: return
         view.setBusy(true)
-        accounService
-                .login(code)
+        api.login(code, "urn:ietf:wg:oauth:2.0:oob:auto")
+                .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
                 .subscribe({
                     view.setBusy(false)

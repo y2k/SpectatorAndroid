@@ -29,11 +29,7 @@ object ServiceLocator {
         return LoginPresenter(view,
                 platform.resolveNavigationService(),
                 platform.resolveScheduler(),
-                resolveAccountService())
-    }
-
-    private fun resolveAccountService(): AccounService {
-        return AccounService()
+                restClient.api)
     }
 
     interface Platform {

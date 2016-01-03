@@ -16,6 +16,7 @@ class RestClient {
                 .baseUrl("http://10.0.0.13:5000/api/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
+                .validateEagerly()
                 .build()
                 .create(Api::class.java)
     }
