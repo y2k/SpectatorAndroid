@@ -2,6 +2,8 @@ package y2k.spectator
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +22,10 @@ class SnapshotListFragment : Fragment() {
                 object : SnapshotsPresenter.View {
 
                     val login = view.findViewById(R.id.login)
+                    val list = view.findViewById(R.id.list) as RecyclerView
 
                     init {
+                        list.layoutManager = LinearLayoutManager(activity)
                         login.setOnClickListener { presenter.login() }
                     }
 
