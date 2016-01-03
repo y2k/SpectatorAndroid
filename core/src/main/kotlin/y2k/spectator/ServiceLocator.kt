@@ -9,6 +9,12 @@ object ServiceLocator {
 
     lateinit var platform: Platform
 
+    private val restClient = RestClient()
+
+    fun resolveSubscriptionsPresenter(view: SubscriptionsPresenter.View): SubscriptionsPresenter {
+        return SubscriptionsPresenter(view, restClient, platform.resolveScheduler())
+    }
+
     fun resolveSnapshotsPresenter(view: SnapshotsPresenter.View): SnapshotsPresenter {
         return SnapshotsPresenter(view,
                 platform.resolveNavigationService(),

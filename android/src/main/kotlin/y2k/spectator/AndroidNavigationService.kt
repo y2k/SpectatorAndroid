@@ -46,6 +46,6 @@ class AndroidNavigationService(app: Application) : NavigationService {
 
     override fun navigateToMain() {
         context?.startActivity(Intent(context, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK + Intent.FLAG_ACTIVITY_NEW_TASK))
+                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }
