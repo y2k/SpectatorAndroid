@@ -40,12 +40,16 @@ class AndroidNavigationService(app: Application) : NavigationService {
         })
     }
 
-    override fun navigateToLogin() {
+    override fun openLogin() {
         context?.startActivity(Intent(context, LoginActivity::class.java))
     }
 
-    override fun navigateToMain() {
+    override fun openMain() {
         context?.startActivity(Intent(context, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+    }
+
+    override fun openAddSubscription() {
+        context?.startActivity(Intent(context, CreateSubscriptionActivity::class.java))
     }
 }

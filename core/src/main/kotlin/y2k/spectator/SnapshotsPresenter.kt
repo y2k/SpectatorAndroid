@@ -21,7 +21,11 @@ class SnapshotsPresenter(
     }
 
     fun login() {
-        navigationService.navigateToLogin()
+        navigationService.openLogin()
+    }
+
+    fun add() {
+        navigationService.openAddSubscription()
     }
 
     interface View {

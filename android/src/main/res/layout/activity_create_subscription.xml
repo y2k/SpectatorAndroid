@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <EditText android:id="@+id/title"
+              android:hint="@string/title_for_subscription"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
+
+    <EditText android:id="@+id/link"
+              android:hint="@string/link_to_site_or_rss"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"/>
+
+    <Button android:id="@+id/create"
+            android:text="@string/create"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

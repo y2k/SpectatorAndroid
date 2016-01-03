@@ -11,6 +11,10 @@ object ServiceLocator {
 
     private val restClient = RestClient()
 
+    fun resolveCreateSubscriptionPresenter(view: CreateSubscriptionPresenter.View): CreateSubscriptionPresenter {
+        return CreateSubscriptionPresenter(view, restClient.api, platform.resolveScheduler())
+    }
+
     fun resolveSubscriptionsPresenter(view: SubscriptionsPresenter.View): SubscriptionsPresenter {
         return SubscriptionsPresenter(view, restClient, platform.resolveScheduler())
     }

@@ -11,11 +11,11 @@ interface Api {
 
     @PUT("subscriptions")
     @FormUrlEncoded
-    fun add(@Query("Source") url: String, @Query("Title") title: String): Observable<Unit>
+    fun create(@Field("Source") url: String, @Field("Title") title: String): Observable<Unit>
 
     @POST("subscriptions/{id}")
     @FormUrlEncoded
-    fun edit(@Path("id") id: Int, @Query("Title") title: String): Observable<Unit>
+    fun edit(@Path("id") id: Int, @Field("Title") title: String): Observable<Unit>
 
     @DELETE("subscriptions/{id}")
     fun delete(@Path("id") id: Int): Observable<Unit>

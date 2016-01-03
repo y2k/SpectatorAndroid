@@ -5,7 +5,9 @@ package y2k.spectator
  */
 interface NavigationService {
 
-    fun navigateToMain()
+    fun openMain()
 
-    fun navigateToLogin()
+    fun openLogin()
+
+    fun openAddSubscription()
 }

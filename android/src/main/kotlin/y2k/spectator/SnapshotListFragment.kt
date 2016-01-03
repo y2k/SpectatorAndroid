@@ -25,6 +25,7 @@ class SnapshotListFragment : Fragment() {
                     val list = view.findViewById(R.id.list) as RecyclerView
 
                     init {
+                        view.findViewById(R.id.add).setOnClickListener { presenter.add() }
                         list.layoutManager = LinearLayoutManager(activity)
                         login.setOnClickListener { presenter.login() }
                     }

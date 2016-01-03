@@ -5,4 +5,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="login">Login</string>
+    <string name="create">Create</string>
+    <string name="link_to_site_or_rss">Link to site or RSS</string>
+    <string name="create_subscription">Create subscription</string>
+    <string name="title_for_subscription">Title for subscription</string>
 </resources>

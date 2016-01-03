@@ -30,7 +30,7 @@ class LoginPresenter(
                 .observeOn(uiScheduler)
                 .subscribe({
                     view.setBusy(false)
-                    navigationService.navigateToMain()
+                    navigationService.openMain()
                 }, {
                     view.setBusy(false)
                     it.printStackTrace()

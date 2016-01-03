@@ -25,5 +25,12 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="y2k.spectator.MainActivity"/>
         </activity>
+        <activity android:name=".CreateSubscriptionActivity"
+                  android:label="@string/create_subscription"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="y2k.spectator.MainActivity"/>
+        </activity>
     </application>
 </manifest>
