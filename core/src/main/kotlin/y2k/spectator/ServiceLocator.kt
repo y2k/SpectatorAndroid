@@ -22,6 +22,7 @@ object ServiceLocator {
 
     fun resolveSnapshotsPresenter(view: SnapshotsPresenter.View): SnapshotsPresenter {
         return SnapshotsPresenter(view,
+                restClient.api,
                 platform.resolveNavigationService(),
                 platform.resolveScheduler())
     }

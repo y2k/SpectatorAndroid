@@ -23,7 +23,7 @@ class Subscription {
     var thumbnail: Int = 0
 
     @SerializedName("Title")
-    var ritle: String? = null
+    var title: String? = null
 
     @SerializedName("UnreadCount")
     var unreadCount: Int = 0

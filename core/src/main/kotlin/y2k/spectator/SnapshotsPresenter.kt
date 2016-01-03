@@ -1,23 +1,29 @@
 package y2k.spectator
 
-import rx.Observable
 import rx.Scheduler
-import java.util.concurrent.TimeUnit
+import rx.schedulers.Schedulers
 
 /**
  * Created by y2k on 1/2/16.
  */
 class SnapshotsPresenter(
         private val view: SnapshotsPresenter.View,
+        private val api: Api,
         private val navigationService: NavigationService,
         private val uiScheduler: Scheduler) {
 
     init {
-        Observable
-                .just(null)
-                .delay(2, TimeUnit.SECONDS)
+        view.setLoginButton(false)
+
+        api.snapshots()
+                .subscribeOn(Schedulers.io())
                 .observeOn(uiScheduler)
-                .subscribe { view.showLogin() }
+                .subscribe ({
+                    view.update(it.snapshots)
+                }, {
+                    it.printStackTrace()
+                    view.setLoginButton(true)
+                })
     }
 
     fun login() {
@@ -30,6 +36,8 @@ class SnapshotsPresenter(
 
     interface View {
 
-        fun showLogin()
+        fun setLoginButton(visible: Boolean)
+
+        fun update(snapshots: List<Snapshot>)
     }
 }

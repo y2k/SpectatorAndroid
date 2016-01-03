@@ -26,10 +26,19 @@ interface Api {
     @PUT("account")
     @FormUrlEncoded
     fun login(@Field("code") code: String, @Field("redirectUri") redirectUri: String): Observable<Unit>
+
+    @GET("snapshots")
+    fun snapshots(): Observable<SnapshotsResponse>
 }
 
 class SubscriptionResponse {
 
     @SerializedName("Subscriptions")
     lateinit var subscriptions: List<Subscription>
+}
+
+class SnapshotsResponse {
+
+    @SerializedName("Snapshots")
+    lateinit var snapshots: List<Snapshot>
 }
