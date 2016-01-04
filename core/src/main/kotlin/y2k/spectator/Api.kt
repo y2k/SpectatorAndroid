@@ -1,6 +1,7 @@
 package y2k.spectator
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.okhttp.ResponseBody
 import retrofit.http.*
 import rx.Observable
 
@@ -29,6 +30,9 @@ interface Api {
 
     @GET("snapshots")
     fun snapshots(): Observable<SnapshotsResponse>
+
+    @GET("images/{id}")
+    fun images(@Path("id") id: Int, @Query("width") width: Int, @Query("height") height: Int): Observable<ResponseBody>
 }
 
 class SubscriptionResponse {

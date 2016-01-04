@@ -1,8 +1,8 @@
 package y2k.spectator
 
 import android.app.Application
+import android.graphics.BitmapFactory
 import android.os.Handler
-import rx.Scheduler
 import rx.schedulers.Schedulers
 
 /**
@@ -16,16 +16,16 @@ class App : Application() {
         ServiceLocator.platform = object : ServiceLocator.Platform {
 
             private val handler = Handler()
-            private val scheduler = Schedulers.from { handler.post(it) }
-            private val navigationService = AndroidNavigationService(this@App)
+            override val decoder = BitmapImageDecoder()
+            override val uiScheduler = Schedulers.from { handler.post(it) }
+            override val navigationService = AndroidNavigationService(this@App)
+        }
+    }
 
-            override fun resolveScheduler(): Scheduler {
-                return scheduler
-            }
+    class BitmapImageDecoder : ImageService.Decoder {
 
-            override fun resolveNavigationService(): NavigationService {
-                return navigationService
-            }
+        override fun decode(data: ByteArray): Any {
+            return BitmapFactory.decodeByteArray(data, 0, data.size)
         }
     }
 }

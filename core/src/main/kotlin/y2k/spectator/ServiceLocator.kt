@@ -12,31 +12,37 @@ object ServiceLocator {
 
     private val restClient = RestClient(TestCookeStorage())
 
+    fun <T> resolveImageService(): ImageService<T> {
+        return ImageService(restClient.api, platform.uiScheduler, platform.decoder)
+    }
+
     fun resolveCreateSubscriptionPresenter(view: CreateSubscriptionPresenter.View): CreateSubscriptionPresenter {
-        return CreateSubscriptionPresenter(view, restClient.api, platform.resolveScheduler())
+        return CreateSubscriptionPresenter(view, restClient.api, platform.uiScheduler)
     }
 
     fun resolveSubscriptionsPresenter(view: SubscriptionsPresenter.View): SubscriptionsPresenter {
-        return SubscriptionsPresenter(view, restClient, platform.resolveScheduler())
+        return SubscriptionsPresenter(view, restClient, platform.uiScheduler)
     }
 
     fun resolveSnapshotsPresenter(view: SnapshotsPresenter.View): SnapshotsPresenter {
         return SnapshotsPresenter(view,
-                restClient.api,
-                platform.resolveNavigationService(),
-                platform.resolveScheduler())
+            restClient.api,
+            platform.navigationService,
+            platform.uiScheduler)
     }
 
     fun resolveLoginPresenter(view: LoginPresenter.View): LoginPresenter {
         return LoginPresenter(view,
-                platform.resolveNavigationService(),
-                platform.resolveScheduler(),
-                restClient.api)
+            platform.navigationService,
+            platform.uiScheduler,
+            restClient.api)
     }
 
     interface Platform {
-        fun resolveScheduler(): Scheduler
-        fun resolveNavigationService(): NavigationService
+
+        val decoder: ImageService.Decoder
+        val uiScheduler: Scheduler
+        val navigationService: NavigationService
     }
 
     class TestCookeStorage : RestClient.CookieStorage {

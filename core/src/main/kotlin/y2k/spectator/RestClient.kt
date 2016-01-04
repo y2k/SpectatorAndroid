@@ -15,8 +15,9 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
 
     val api: Api
 
+    private val client = OkHttpClient()
+
     init {
-        val client = OkHttpClient()
         client.interceptors().add(AddCookiesInterceptor())
         client.interceptors().add(ReceiveCookieInterceptor())
 
@@ -30,7 +31,7 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
                 .create(Api::class.java)
     }
 
-    inner class AddCookiesInterceptor : Interceptor {
+    private inner class AddCookiesInterceptor : Interceptor {
 
         override fun intercept(chain: Interceptor.Chain): Response? {
             val builder = chain.request().newBuilder()
@@ -41,7 +42,7 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
         }
     }
 
-    inner class ReceiveCookieInterceptor : Interceptor {
+    private inner class ReceiveCookieInterceptor : Interceptor {
 
         override fun intercept(chain: Interceptor.Chain): Response? {
             val response = chain.proceed(chain.request())
