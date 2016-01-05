@@ -56,9 +56,9 @@ class SnapshotListFragment : Fragment() {
         override fun onBindViewHolder(vh: VH, position: Int) {
             items[position].apply {
                 val aspect = thumbnailWidth.toFloat() / thumbnailHeight
-                (vh.itemView.findViewById(R.id.aspectPanel) as FixedAspectPanel).aspect = aspect
-                (vh.itemView.findViewById(R.id.image) as WebImageView).image = if ( thumbnail == 0) null else thumbnail
-                (vh.itemView.findViewById(android.R.id.text1) as TextView).text = title
+                vh.aspectPanel.aspect = aspect
+                vh.image.image = image
+                vh.title.text = title
             }
         }
 
@@ -70,6 +70,11 @@ class SnapshotListFragment : Fragment() {
             return items.size
         }
 
-        class VH(view: View?) : RecyclerView.ViewHolder(view)
+        class VH(view: View) : RecyclerView.ViewHolder(view) {
+
+            val aspectPanel = view.findViewById(R.id.aspectPanel) as FixedAspectPanel
+            val image = view.findViewById(R.id.image) as WebImageView
+            val title = view.findViewById(android.R.id.text1) as TextView
+        }
     }
 }

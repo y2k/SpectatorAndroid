@@ -12,13 +12,13 @@ class ImageService<T>(
     private val uiScheduler: Scheduler,
     private val decoder: ImageService.Decoder) {
 
-    fun get(id: Int?, width: Int, height: Int): Observable<T> {
-        if (id == null) return Observable.empty()
+    fun get(image: Image): Observable<T> {
+        if (image.isDefault) return Observable.empty()
 
-        println("IMAGE-SERVICE: $id | $width | $height")
+        println("IMAGE-SERVICE: $image")
 
         return api
-            .images(id, width, height)
+            .images(image.id, image.width, image.height)
             .map { it.bytes() }
             .map { decoder.decode(it) as T }
             .subscribeOn(Schedulers.io())

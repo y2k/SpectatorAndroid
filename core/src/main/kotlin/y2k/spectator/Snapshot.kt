@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName
  */
 class Snapshot {
 
+    val image: Image
+        get() = if (thumbnail == 0) Image.Default else Image(thumbnail)
+
     @SerializedName("HasContent")
     var hasContent: Boolean = false
 
