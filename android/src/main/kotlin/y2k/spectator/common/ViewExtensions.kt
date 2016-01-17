@@ -11,3 +11,11 @@ import android.view.ViewGroup
 fun ViewGroup.inflate(layoutId: Int): View {
     return LayoutInflater.from(context).inflate(layoutId, this, false)
 }
+
+fun ViewGroup.children(): List<View> {
+    return (0..childCount - 1).map { getChildAt(it) }
+}
+
+fun View.removeFromParent() {
+    (parent as ViewGroup).removeView(this)
+}

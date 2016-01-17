@@ -16,6 +16,10 @@ object ServiceLocator {
         return ImageService(restClient.api, platform.uiScheduler, platform.decoder)
     }
 
+    fun resolveSnapshotPresenter(view: SnapshotInfoPresenter.View): SnapshotInfoPresenter {
+        return SnapshotInfoPresenter(view)
+    }
+
     fun resolveCreateSubscriptionPresenter(view: CreateSubscriptionPresenter.View): CreateSubscriptionPresenter {
         return CreateSubscriptionPresenter(view, restClient.api, platform.uiScheduler)
     }

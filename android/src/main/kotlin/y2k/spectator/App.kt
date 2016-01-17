@@ -16,6 +16,7 @@ class App : Application() {
         ServiceLocator.platform = object : ServiceLocator.Platform {
 
             private val handler = Handler()
+            
             override val decoder = BitmapImageDecoder()
             override val uiScheduler = Schedulers.from { handler.post(it) }
             override val navigationService = AndroidNavigationService(this@App)
