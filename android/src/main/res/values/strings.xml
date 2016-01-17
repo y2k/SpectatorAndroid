@@ -9,4 +9,5 @@
     <string name="link_to_site_or_rss">Link to site or RSS</string>
     <string name="create_subscription">Create subscription</string>
     <string name="title_for_subscription">Title for subscription</string>
+    <string name="snapshot">Snapshot</string>
 </resources>

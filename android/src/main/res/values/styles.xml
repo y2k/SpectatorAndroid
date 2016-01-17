@@ -3,13 +3,27 @@
     <color name="colorPrimary">#119c8f</color>
     <color name="colorPrimaryDark">#008073</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorBackground">#E8E8E8</color>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
+
+    <style name="Spectator_Toolbar" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="Spectator_TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabBackground">@color/colorPrimary</item>
+        <!--<item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>-->
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 </resources>

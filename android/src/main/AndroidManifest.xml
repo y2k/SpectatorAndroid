@@ -33,5 +33,12 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="y2k.spectator.MainActivity"/>
         </activity>
+        <activity android:name=".SnapshotActivity"
+                  android:label="@string/snapshot"
+                  android:parentActivityName=".MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="y2k.spectator.MainActivity"/>
+        </activity>
     </application>
 </manifest>
