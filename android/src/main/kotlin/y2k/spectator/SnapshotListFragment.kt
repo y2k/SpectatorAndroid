@@ -30,9 +30,10 @@ class SnapshotListFragment : Fragment() {
                 val adapter = Adapter()
 
                 init {
-                    view.findViewById(R.id.add).setOnClickListener { presenter.add() }
                     list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    adapter.clickListener = { presenter.openSnapshot(it) }
                     list.adapter = adapter
+                    view.findViewById(R.id.add).setOnClickListener { presenter.add() }
                     login.setOnClickListener { presenter.login() }
                 }
 
@@ -52,6 +53,7 @@ class SnapshotListFragment : Fragment() {
     class Adapter : RecyclerView.Adapter<Adapter.VH>() {
 
         var items: List<Snapshot> = emptyList()
+        var clickListener: ((Snapshot) -> Unit)? = null
 
         override fun onBindViewHolder(vh: VH, position: Int) {
             items[position].apply {
@@ -63,7 +65,11 @@ class SnapshotListFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH? {
-            return VH(parent.inflate(R.layout.item_snapshot))
+            return VH(parent.inflate(R.layout.item_snapshot)).apply {
+                itemView.findViewById(R.id.card).setOnClickListener {
+                    clickListener?.invoke(items[adapterPosition])
+                }
+            }
         }
 
         override fun getItemCount(): Int {

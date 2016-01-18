@@ -40,13 +40,22 @@ class AndroidNavigationService(app: Application) : NavigationService {
         })
     }
 
+    override fun getArgument(): String? {
+        return context?.intent?.getStringExtra("arg")
+    }
+
+    override fun <T> open(presenter: Class<T>, arg: String?) {
+        context?.startActivity(
+            Intent(context, SnapshotActivity::class.java).putExtra("arg", arg))
+    }
+
     override fun openLogin() {
         context?.startActivity(Intent(context, LoginActivity::class.java))
     }
 
     override fun openMain() {
         context?.startActivity(Intent(context, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 
     override fun openAddSubscription() {

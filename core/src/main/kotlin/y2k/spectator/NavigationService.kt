@@ -10,4 +10,8 @@ interface NavigationService {
     fun openLogin()
 
     fun openAddSubscription()
+
+    fun <T> open(presenter: Class<T>, arg: String? = null)
+
+    fun getArgument(): String?
 }

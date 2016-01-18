@@ -7,23 +7,23 @@ import rx.schedulers.Schedulers
  * Created by y2k on 1/2/16.
  */
 class SnapshotsPresenter(
-        private val view: SnapshotsPresenter.View,
-        private val api: Api,
-        private val navigationService: NavigationService,
-        private val uiScheduler: Scheduler) {
+    private val view: SnapshotsPresenter.View,
+    private val api: Api,
+    private val navigationService: NavigationService,
+    private val uiScheduler: Scheduler) {
 
     init {
         view.setLoginButton(false)
 
         api.snapshots()
-                .subscribeOn(Schedulers.io())
-                .observeOn(uiScheduler)
-                .subscribe ({
-                    view.update(it.snapshots)
-                }, {
-                    it.printStackTrace()
-                    view.setLoginButton(true)
-                })
+            .subscribeOn(Schedulers.io())
+            .observeOn(uiScheduler)
+            .subscribe ({
+                view.update(it.snapshots)
+            }, {
+                it.printStackTrace()
+                view.setLoginButton(true)
+            })
     }
 
     fun login() {
@@ -32,6 +32,10 @@ class SnapshotsPresenter(
 
     fun add() {
         navigationService.openAddSubscription()
+    }
+
+    fun openSnapshot(snapshot: Snapshot) {
+        navigationService.open(SnapshotInfoPresenter::class.java, "" + snapshot.id)
     }
 
     interface View {
