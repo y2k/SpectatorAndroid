@@ -19,8 +19,12 @@ class AndroidNavigationService(app: Application) : NavigationService {
                 context = activity
             }
 
+            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+                context = activity
+            }
+
             override fun onActivityPaused(activity: Activity?) {
-                context = null
+                if (context == activity) context = null
             }
 
             override fun onActivityStarted(activity: Activity?) {
@@ -33,9 +37,6 @@ class AndroidNavigationService(app: Application) : NavigationService {
             }
 
             override fun onActivityStopped(activity: Activity?) {
-            }
-
-            override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
             }
         })
     }

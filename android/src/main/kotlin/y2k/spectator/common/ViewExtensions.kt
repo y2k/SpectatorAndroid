@@ -1,5 +1,6 @@
 package y2k.spectator.common
 
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,4 +19,13 @@ fun ViewGroup.children(): List<View> {
 
 fun View.removeFromParent() {
     (parent as ViewGroup).removeView(this)
+}
+
+fun ViewPager.addOnPageChangeListener(callback: (Int) -> Unit) {
+    addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+
+        override fun onPageSelected(position: Int) {
+            callback(position)
+        }
+    })
 }

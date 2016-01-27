@@ -1,6 +1,7 @@
 package y2k.spectator
 
 import rx.Scheduler
+import rx.schedulers.Schedulers
 
 /**
  * Created by y2k on 1/18/16.
@@ -12,8 +13,20 @@ class SnapshotInfoPresenter(
     private val uiScheduler: Scheduler) {
 
     init {
-        // TODO:
+        api.snapshot(navigationService.getArgument()!!)
+            .subscribeOn(Schedulers.io())
+            .observeOn(uiScheduler)
+            .subscribe {
+                view.updateInfo(it)
+            }
     }
 
-    interface View
+    fun tabSelected(position: Int) {
+        // throw UnsupportedOperationException("not implemented") // FIXME:
+    }
+
+    interface View {
+
+        fun updateInfo(snapshot: Snapshot)
+    }
 }

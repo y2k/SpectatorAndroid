@@ -31,6 +31,9 @@ interface Api {
     @GET("snapshots")
     fun snapshots(): Observable<SnapshotsResponse>
 
+    @GET("snapshots/{id}")
+    fun snapshot(@Path("id") id: String): Observable<Snapshot>
+
     @GET("images/{id}")
     fun images(@Path("id") id: Int, @Query("width") width: Int, @Query("height") height: Int): Observable<ResponseBody>
 }
