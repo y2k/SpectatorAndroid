@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.webkit.WebView
 import android.widget.TextView
 import y2k.spectator.common.ViewPagerWrapper
 import y2k.spectator.common.addOnPageChangeListener
@@ -22,9 +23,14 @@ class SnapshotActivity : AppCompatActivity() {
 
         val titleView = view.findViewById(R.id.title) as TextView
         val updatedView = view.findViewById(R.id.updated)as TextView
+        val contentView = view.findViewById(R.id.contentView) as WebView
 
         presenter = ServiceLocator.resolveSnapshotPresenter(
             object : SnapshotInfoPresenter.View {
+
+                override fun updateBrowser(data: String, baseUrl: String) {
+                    contentView.loadDataWithBaseURL(baseUrl, data, null, null, null)
+                }
 
                 override fun updateInfo(snapshot: Snapshot) {
                     snapshot.apply {

@@ -10,6 +10,9 @@ import rx.Observable
  */
 interface Api {
 
+    @GET("content/{id}")
+    fun content(@Path("id") id: String): Observable<ResponseBody>
+
     @PUT("subscriptions")
     @FormUrlEncoded
     fun create(@Field("Source") url: String, @Field("Title") title: String): Observable<Unit>

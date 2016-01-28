@@ -6,3 +6,4 @@ ios/robovm-build
 *.iml
 local.properties
 build
+captures
