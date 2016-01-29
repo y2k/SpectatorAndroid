@@ -1,10 +1,10 @@
 package y2k.spectator.presenter
 
 import rx.Scheduler
+import y2k.spectator.common.subscribe
 import y2k.spectator.model.Snapshot
 import y2k.spectator.service.Api
 import y2k.spectator.service.NavigationService
-import y2k.spectator.common.subscribe
 
 /**
  * Created by y2k on 1/18/16.
