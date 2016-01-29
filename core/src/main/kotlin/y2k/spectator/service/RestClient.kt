@@ -1,4 +1,4 @@
-package y2k.spectator
+package y2k.spectator.service
 
 import com.squareup.okhttp.Interceptor
 import com.squareup.okhttp.OkHttpClient

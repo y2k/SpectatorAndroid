@@ -1,4 +1,4 @@
-package y2k.spectator
+package y2k.spectator.service
 
 import com.google.gson.annotations.SerializedName
 import com.squareup.okhttp.ResponseBody

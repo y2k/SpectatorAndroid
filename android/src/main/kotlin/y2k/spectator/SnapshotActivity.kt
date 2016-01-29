@@ -26,19 +26,23 @@ class SnapshotActivity : AppCompatActivity() {
         val titleView = view.findViewById(R.id.title) as TextView
         val updatedView = view.findViewById(R.id.updated)as TextView
         val contentView = view.findViewById(R.id.contentView) as WebView
+        val diffView = view.findViewById(R.id.diffView) as WebView
 
         presenter = ServiceLocator.resolveSnapshotPresenter(
             object : SnapshotInfoPresenter.View {
-
-                override fun updateBrowser(data: String, baseUrl: String) {
-                    contentView.loadDataWithBaseURL(baseUrl, data, null, null, null)
-                }
-
                 override fun updateInfo(snapshot: Snapshot) {
                     snapshot.apply {
                         titleView.text = title
                         updatedView.text = "Created: $updated"
                     }
+                }
+
+                override fun updateBrowser(data: String, baseUrl: String) {
+                    contentView.loadDataWithBaseURL(baseUrl, data, null, null, null)
+                }
+
+                override fun updateDiffBrowser(data: String, baseUrl: String) {
+                    diffView.loadDataWithBaseURL(baseUrl, data, null, null, null)
                 }
             })
     }

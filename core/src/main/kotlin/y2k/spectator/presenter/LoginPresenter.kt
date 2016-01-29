@@ -2,8 +2,8 @@ package y2k.spectator.presenter
 
 import rx.Scheduler
 import rx.schedulers.Schedulers
-import y2k.spectator.Api
 import y2k.spectator.common.findGroup
+import y2k.spectator.service.Api
 import y2k.spectator.service.NavigationService
 import java.net.URLDecoder
 

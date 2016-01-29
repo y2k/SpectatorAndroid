@@ -2,7 +2,7 @@ package y2k.spectator.presenter
 
 import rx.Scheduler
 import rx.schedulers.Schedulers
-import y2k.spectator.Api
+import y2k.spectator.service.Api
 
 /**
  * Created by y2k on 1/3/16.

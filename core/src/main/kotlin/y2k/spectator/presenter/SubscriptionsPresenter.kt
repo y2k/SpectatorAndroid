@@ -1,9 +1,9 @@
 package y2k.spectator.presenter
 
 import rx.Scheduler
-import y2k.spectator.RestClient
 import y2k.spectator.common.subscribe
 import y2k.spectator.model.Subscription
+import y2k.spectator.service.RestClient
 
 /**
  * Created by y2k on 1/3/16.

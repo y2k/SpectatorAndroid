@@ -4,6 +4,7 @@ import rx.Scheduler
 import y2k.spectator.presenter.*
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
+import y2k.spectator.service.RestClient
 import java.util.*
 
 /**

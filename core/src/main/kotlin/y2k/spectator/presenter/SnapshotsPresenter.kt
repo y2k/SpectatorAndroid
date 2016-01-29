@@ -2,8 +2,8 @@ package y2k.spectator.presenter
 
 import rx.Scheduler
 import rx.schedulers.Schedulers
-import y2k.spectator.Api
 import y2k.spectator.model.Snapshot
+import y2k.spectator.service.Api
 import y2k.spectator.service.NavigationService
 
 /**

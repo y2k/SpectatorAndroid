@@ -3,7 +3,6 @@ package y2k.spectator.service
 import rx.Observable
 import rx.Scheduler
 import rx.schedulers.Schedulers
-import y2k.spectator.Api
 import y2k.spectator.model.Image
 
 /**
