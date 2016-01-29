@@ -13,3 +13,9 @@ fun <T> Observable<T>.subscribe(scheduler: Scheduler, onNext: (T) -> Unit) {
         .observeOn(scheduler)
         .subscribe(onNext)
 }
+
+fun <T> Observable<T>.subscribe(scheduler: Scheduler, onNext: (T) -> Unit, onError: (Throwable) -> Unit) {
+    this.subscribeOn(Schedulers.io())
+        .observeOn(scheduler)
+        .subscribe(onNext, onError)
+}
