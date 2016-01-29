@@ -1,18 +1,20 @@
-package y2k.spectator
+package y2k.spectator.presenter
 
 import rx.Scheduler
 import rx.schedulers.Schedulers
+import y2k.spectator.Api
 import y2k.spectator.common.findGroup
+import y2k.spectator.service.NavigationService
 import java.net.URLDecoder
 
 /**
  * Created by y2k on 1/2/16.
  */
 class LoginPresenter(
-        private val view: LoginPresenter.View,
-        private val navigationService: NavigationService,
-        private val uiScheduler: Scheduler,
-        private val api: Api) {
+    private val view: View,
+    private val navigationService: NavigationService,
+    private val uiScheduler: Scheduler,
+    private val api: Api) {
 
     init {
         view.loadUrl("https://accounts.google.com/o/oauth2/auth?" +

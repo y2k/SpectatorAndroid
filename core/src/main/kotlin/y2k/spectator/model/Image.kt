@@ -1,4 +1,4 @@
-package y2k.spectator
+package y2k.spectator.model
 
 /**
  * Created by y2k on 1/5/16.

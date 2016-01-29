@@ -3,6 +3,7 @@ package y2k.spectator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
+import y2k.spectator.presenter.CreateSubscriptionPresenter
 
 /**
  * Created by y2k on 1/3/16.

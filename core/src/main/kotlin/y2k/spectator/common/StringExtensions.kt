@@ -1,7 +1,5 @@
 package y2k.spectator.common
 
-import kotlin.text.Regex
-
 /**
  * Created by y2k on 1/2/16.
  */

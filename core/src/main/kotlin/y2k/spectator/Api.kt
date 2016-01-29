@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.okhttp.ResponseBody
 import retrofit.http.*
 import rx.Observable
+import y2k.spectator.model.Snapshot
+import y2k.spectator.model.Subscription
 
 /**
  * Created by y2k on 1/3/16.

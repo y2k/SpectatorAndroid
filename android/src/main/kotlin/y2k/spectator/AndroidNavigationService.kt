@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
+import y2k.spectator.service.NavigationService
 
 /**
  * Created by y2k on 1/2/16.

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import y2k.spectator.presenter.LoginPresenter
 
 /**
  * Created by y2k on 1/2/16.

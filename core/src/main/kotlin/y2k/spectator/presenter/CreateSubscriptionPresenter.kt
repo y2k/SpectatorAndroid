@@ -1,15 +1,16 @@
-package y2k.spectator
+package y2k.spectator.presenter
 
 import rx.Scheduler
 import rx.schedulers.Schedulers
+import y2k.spectator.Api
 
 /**
  * Created by y2k on 1/3/16.
  */
 class CreateSubscriptionPresenter(
-        private val view: CreateSubscriptionPresenter.View,
-        private val api: Api,
-        private val uiScheduler: Scheduler) {
+    private val view: View,
+    private val api: Api,
+    private val uiScheduler: Scheduler) {
 
     fun create() {
         // TODO:

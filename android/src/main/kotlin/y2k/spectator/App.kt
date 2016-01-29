@@ -4,6 +4,7 @@ import android.app.Application
 import android.graphics.BitmapFactory
 import android.os.Handler
 import rx.schedulers.Schedulers
+import y2k.spectator.service.ImageService
 
 /**
  * Created by y2k on 1/2/16.

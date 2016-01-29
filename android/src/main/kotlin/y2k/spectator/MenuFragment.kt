@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import y2k.spectator.common.inflate
+import y2k.spectator.model.Subscription
+import y2k.spectator.presenter.SubscriptionsPresenter
 
 /**
  * Created by y2k on 1/2/16.

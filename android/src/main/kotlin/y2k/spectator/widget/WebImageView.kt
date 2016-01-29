@@ -6,7 +6,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import rx.subjects.PublishSubject
-import y2k.spectator.Image
+import y2k.spectator.model.Image
 import y2k.spectator.ServiceLocator
 import kotlin.properties.Delegates
 

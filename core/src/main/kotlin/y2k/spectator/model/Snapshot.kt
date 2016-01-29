@@ -1,4 +1,4 @@
-package y2k.spectator
+package y2k.spectator.model
 
 import com.google.gson.annotations.SerializedName
 

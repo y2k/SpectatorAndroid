@@ -9,6 +9,8 @@ import android.webkit.WebView
 import android.widget.TextView
 import y2k.spectator.common.ViewPagerWrapper
 import y2k.spectator.common.addOnPageChangeListener
+import y2k.spectator.model.Snapshot
+import y2k.spectator.presenter.SnapshotInfoPresenter
 
 /**
  * Created by y2k on 1/17/16.

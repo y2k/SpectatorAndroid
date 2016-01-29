@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import y2k.spectator.common.inflate
+import y2k.spectator.model.Snapshot
+import y2k.spectator.presenter.SnapshotsPresenter
 import y2k.spectator.widget.FixedAspectPanel
 import y2k.spectator.widget.WebImageView
 
