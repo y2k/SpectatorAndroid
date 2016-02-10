@@ -40,7 +40,7 @@ object ServiceLocator {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun <T : Any> resolve(type: KClass<T>): T = types[type] as T
+    fun <T : Any> resolve(type: KClass<T>): T = types[type]!!() as T
 
     fun <T> resolveImageService(): ImageService<T> {
         return ImageService(restClient.api, platform.uiScheduler, platform.decoder)
