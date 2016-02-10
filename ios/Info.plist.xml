@@ -28,6 +28,8 @@
     <string>Main</string>
     <key>MinimumOSVersion</key>
     <string>8.0</string>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
     <key>UIDeviceFamily</key>
     <array>
         <integer>1</integer>

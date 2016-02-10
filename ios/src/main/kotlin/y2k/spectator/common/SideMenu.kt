@@ -20,9 +20,7 @@ class SideMenu(private val parent: UIViewController, menuStoryboardId: String) {
     }
 
     private fun restoreViewPosition() {
-        parentView.subviews
-            //            .filter { it != menuView }
-            .forEach { it.frame = it.frame.offset(-PanelWidth, 0.0) }
+        parentView.subviews.forEach { it.frame = it.frame.offset(-PanelWidth, 0.0) }
     }
 
     private fun removeMenuViews() {
@@ -55,11 +53,7 @@ class SideMenu(private val parent: UIViewController, menuStoryboardId: String) {
 
         UIView.animate(0.3) {
             menuView.frame = menuFrame
-            for (s in parentView.subviews) {
-                var f = s.frame
-                f = f.offset(PanelWidth, 0.0)
-                s.frame = f
-            }
+            parentView.subviews.forEach { it.frame = it.frame.offset(PanelWidth, 0.0) }
         }
     }
 
