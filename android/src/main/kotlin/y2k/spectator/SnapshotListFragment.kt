@@ -9,9 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import y2k.spectator.common.ListAdapter
+import y2k.spectator.common.bind
+import y2k.spectator.common.find
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Snapshot
-import y2k.spectator.presenter.SnapshotsPresenter
 import y2k.spectator.widget.FixedAspectPanel
 import y2k.spectator.widget.WebImageView
 
@@ -20,34 +21,24 @@ import y2k.spectator.widget.WebImageView
  */
 class SnapshotListFragment : Fragment() {
 
-    lateinit var presenter: SnapshotsPresenter
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
 
-        presenter = ServiceLocator.resolveSnapshotsPresenter(
-            object : SnapshotsPresenter.View {
+        val presenter = ServiceLocator.resolveSnapshotsPresenter()
 
-                val login = view.findViewById(R.id.login)
-                val list = view.findViewById(R.id.list) as RecyclerView
-                val adapter = Adapter()
+        view.findViewById(R.id.add).bind { presenter.add() }
+        view.findViewById(R.id.login).apply {
+            bind(presenter.isNeedLogin)
+            bind { presenter.login() }
+        }
 
-                init {
-                    list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                    adapter.clickListener = { presenter.openSnapshot(it) }
-                    list.adapter = adapter
-                    view.findViewById(R.id.add).setOnClickListener { presenter.add() }
-                    login.setOnClickListener { presenter.login() }
-                }
-
-                override fun update(snapshots: List<Snapshot>) {
-                    adapter.update(snapshots)
-                }
-
-                override fun setLoginButton(visible: Boolean) {
-                    login.visibility = if (visible) View.VISIBLE else View.GONE
-                }
-            })
+        val myAdapter = Adapter()
+        view.find<RecyclerView>(R.id.list).apply {
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            adapter = myAdapter
+        }
+        myAdapter.bind(presenter.snapshots)
+        myAdapter.clickListener = { presenter.openSnapshot(it) }
 
         return view
     }

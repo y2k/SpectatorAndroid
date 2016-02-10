@@ -1,5 +1,6 @@
 package y2k.spectator.common
 
+import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -31,3 +32,8 @@ fun EditText.bind(binding: Binding<String>) {
 }
 
 fun View.bind(command: () -> Unit) = setOnClickListener { command() }
+
+
+fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
+    dataSource.subject.subscribe { update(it) }
+}

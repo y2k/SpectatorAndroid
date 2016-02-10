@@ -35,3 +35,8 @@ fun ViewPager.addOnPageChangeListener(callback: (Int) -> Unit) {
 fun <T : View> Activity.find(id: Int): T {
     return findViewById(id) as T
 }
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> View.find(id: Int): T {
+    return findViewById(id) as T
+}
