@@ -5,6 +5,7 @@ import org.robovm.apple.uikit.UITableView
 import org.robovm.apple.uikit.UIViewController
 import org.robovm.objc.annotation.CustomClass
 import org.robovm.objc.annotation.IBOutlet
+import y2k.spectator.common.SideMenu
 
 /**
  * Created by y2k on 10/02/16.
@@ -17,6 +18,8 @@ class MainViewController : UIViewController() {
 
     override fun viewDidLoad() {
         super.viewDidLoad()
-        // TODO:
+
+        val sideMenu = SideMenu(this, "Menu")
+        sideMenu.attach()
     }
 }
