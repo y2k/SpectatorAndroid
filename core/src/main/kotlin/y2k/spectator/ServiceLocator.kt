@@ -31,8 +31,8 @@ object ServiceLocator {
         return CreateSubscriptionPresenter(restClient.api, platform.uiScheduler)
     }
 
-    fun resolveSubscriptionsPresenter(view: SubscriptionsPresenter.View): SubscriptionsPresenter {
-        return SubscriptionsPresenter(view, restClient, platform.uiScheduler)
+    fun resolveSubscriptionsPresenter(): SubscriptionsPresenter {
+        return SubscriptionsPresenter(restClient, platform.uiScheduler)
     }
 
     fun resolveSnapshotsPresenter(): SnapshotsPresenter {

@@ -64,6 +64,10 @@ class SnapshotListFragment : Fragment() {
             }
         }
 
+        override fun getItemId(position: Int): Long {
+            return items[position].id.toLong()
+        }
+
         class VH(view: View) : RecyclerView.ViewHolder(view) {
 
             val aspectPanel = view.findViewById(R.id.aspectPanel) as FixedAspectPanel

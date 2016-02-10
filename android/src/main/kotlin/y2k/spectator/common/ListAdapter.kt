@@ -24,4 +24,8 @@ abstract class ListAdapter<R, T : RecyclerView.ViewHolder>(
     override fun getItemCount(): Int {
         return items.size
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }
