@@ -36,17 +36,11 @@ object ServiceLocator {
     }
 
     fun resolveSnapshotsPresenter(): SnapshotsPresenter {
-        return SnapshotsPresenter(
-            restClient.api,
-            platform.navigationService,
-            platform.uiScheduler)
+        return SnapshotsPresenter(restClient.api, platform.navigationService, platform.uiScheduler)
     }
 
-    fun resolveLoginPresenter(view: LoginPresenter.View): LoginPresenter {
-        return LoginPresenter(view,
-            platform.navigationService,
-            platform.uiScheduler,
-            restClient.api)
+    fun resolveLoginPresenter(): LoginPresenter {
+        return LoginPresenter(platform.navigationService, platform.uiScheduler, restClient.api)
     }
 
     interface Platform {

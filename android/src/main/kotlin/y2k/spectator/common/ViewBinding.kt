@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.EditText
 
 /**
@@ -33,7 +35,25 @@ fun EditText.bind(binding: Binding<String>) {
 
 fun View.bind(command: () -> Unit) = setOnClickListener { command() }
 
-
 fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
     dataSource.subject.subscribe { update(it) }
+}
+
+fun WebView.bindLoadUrl(binding: Binding<String>) {
+    binding.subject.subscribe { loadUrl(it) }
+    loadUrl(binding.value) // TODO:
+}
+
+fun WebView.bindTitle(binding: Binding<String>) {
+    setWebViewClient(object : WebViewClient() {
+
+        override fun onPageFinished(view: WebView, url: String?) {
+            binding.value = view.title
+        }
+
+        override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+            view.loadUrl(url)
+            return true;
+        }
+    })
 }
