@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import y2k.spectator.common.ListAdapter
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Snapshot
 import y2k.spectator.presenter.SnapshotsPresenter
@@ -40,8 +41,7 @@ class SnapshotListFragment : Fragment() {
                 }
 
                 override fun update(snapshots: List<Snapshot>) {
-                    adapter.items = snapshots
-                    adapter.notifyDataSetChanged()
+                    adapter.update(snapshots)
                 }
 
                 override fun setLoginButton(visible: Boolean) {
@@ -52,9 +52,8 @@ class SnapshotListFragment : Fragment() {
         return view
     }
 
-    class Adapter : RecyclerView.Adapter<Adapter.VH>() {
+    class Adapter : ListAdapter<Snapshot, Adapter.VH>() {
 
-        var items: List<Snapshot> = emptyList()
         var clickListener: ((Snapshot) -> Unit)? = null
 
         override fun onBindViewHolder(vh: VH, position: Int) {
@@ -72,10 +71,6 @@ class SnapshotListFragment : Fragment() {
                     clickListener?.invoke(items[adapterPosition])
                 }
             }
-        }
-
-        override fun getItemCount(): Int {
-            return items.size
         }
 
         class VH(view: View) : RecyclerView.ViewHolder(view) {
