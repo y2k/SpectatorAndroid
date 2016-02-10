@@ -8,15 +8,13 @@ import org.robovm.objc.annotation.IBOutlet
 
 @CustomClass("MyViewController")
 class MyViewController : UIViewController() {
-    private val counterStore = CounterStore()
 
     @IBOutlet
     private val label: UILabel? = null
 
     @IBAction
     private fun clicked() {
-        counterStore.add(1)
-        label!!.text = "Click Nr. " + counterStore.get()
+    	// TODO:
     }
 }
 
