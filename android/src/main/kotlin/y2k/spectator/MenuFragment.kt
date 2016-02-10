@@ -13,6 +13,7 @@ import y2k.spectator.common.bind
 import y2k.spectator.common.find
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Subscription
+import y2k.spectator.presenter.SubscriptionsViewModel
 
 /**
  * Created by y2k on 1/2/16.
@@ -21,10 +22,10 @@ class MenuFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_menu, container, false)
-        val presenter = ServiceLocator.resolveSubscriptionsPresenter();
+        val viewModel = ServiceLocator.resolve(SubscriptionsViewModel::class);
         view.find<RecyclerView>(R.id.list).apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = Adapter().apply { bind(presenter.subscriptions) }
+            adapter = Adapter().apply { bind(viewModel.subscriptions) }
         }
         return view
     }

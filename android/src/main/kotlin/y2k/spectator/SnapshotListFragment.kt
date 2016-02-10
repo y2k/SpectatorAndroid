@@ -13,6 +13,7 @@ import y2k.spectator.common.bind
 import y2k.spectator.common.find
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Snapshot
+import y2k.spectator.presenter.SnapshotsViewModel
 import y2k.spectator.widget.FixedAspectPanel
 import y2k.spectator.widget.WebImageView
 
@@ -23,18 +24,18 @@ class SnapshotListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
-        val presenter = ServiceLocator.resolveSnapshotsPresenter()
+        val viewModel = ServiceLocator.resolve(SnapshotsViewModel::class)
 
-        view.findViewById(R.id.add).bind { presenter.add() }
+        view.findViewById(R.id.add).bind { viewModel.add() }
         view.findViewById(R.id.login).apply {
-            bind(presenter.isNeedLogin)
-            bind { presenter.login() }
+            bind(viewModel.isNeedLogin)
+            bind { viewModel.login() }
         }
         view.find<RecyclerView>(R.id.list).apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             adapter = Adapter().apply {
-                bind(presenter.snapshots)
-                clickListener = { presenter.openSnapshot(it) }
+                bind(viewModel.snapshots)
+                clickListener = { viewModel.openSnapshot(it) }
             }
         }
         return view

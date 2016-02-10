@@ -7,6 +7,7 @@ import y2k.spectator.common.bind
 import y2k.spectator.common.bindLoadUrl
 import y2k.spectator.common.bindTitle
 import y2k.spectator.common.find
+import y2k.spectator.presenter.LoginViewModel
 
 /**
  * Created by y2k on 1/2/16.
@@ -17,12 +18,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val presenter = ServiceLocator.resolveLoginPresenter()
-        findViewById(R.id.progress).bind(presenter.isBusy)
+        val viewModel = ServiceLocator.resolve(LoginViewModel::class)
+        findViewById(R.id.progress).bind(viewModel.isBusy)
         find<WebView>(R.id.webView).apply {
             settings.javaScriptEnabled = true
-            bindLoadUrl(presenter.url)
-            bindTitle(presenter.title)
+            bindLoadUrl(viewModel.url)
+            bindTitle(viewModel.title)
         }
     }
 }

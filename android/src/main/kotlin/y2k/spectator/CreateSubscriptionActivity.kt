@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import y2k.spectator.common.bind
 import y2k.spectator.common.find
+import y2k.spectator.presenter.CreateSubscriptionViewModel
 
 /**
  * Created by y2k on 1/3/16.
@@ -15,7 +16,7 @@ class CreateSubscriptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_subscription)
 
-        ServiceLocator.resolveCreateSubscriptionPresenter().apply {
+        ServiceLocator.resolve(CreateSubscriptionViewModel::class).apply {
             findViewById(R.id.create).bind { create() }
             findViewById(R.id.create).bind(isBusy)
             find<EditText>(R.id.title).bind(title)
