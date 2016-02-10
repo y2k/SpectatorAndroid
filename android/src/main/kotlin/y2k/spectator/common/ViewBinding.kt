@@ -7,6 +7,7 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
+import y2k.spectator.model.Page
 
 /**
  * Created by y2k on 2/10/16.
@@ -37,6 +38,12 @@ fun View.bind(command: () -> Unit) = setOnClickListener { command() }
 
 fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
     dataSource.subject.subscribe { update(it) }
+}
+
+fun WebView.bind(binding: Binding<Page>) {
+    binding.subject.subscribe {
+        loadDataWithBaseURL(it.baseUrl, it.data, null, null, null)
+    }
 }
 
 fun WebView.bindLoadUrl(binding: Binding<String>) {

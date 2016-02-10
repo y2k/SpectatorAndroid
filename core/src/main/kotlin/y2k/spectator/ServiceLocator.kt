@@ -20,27 +20,24 @@ object ServiceLocator {
         return ImageService(restClient.api, platform.uiScheduler, platform.decoder)
     }
 
-    fun resolveSnapshotPresenter(view: SnapshotInfoPresenter.View): SnapshotInfoPresenter {
-        return SnapshotInfoPresenter(view,
-            restClient.api,
-            platform.navigationService,
-            platform.uiScheduler)
+    fun resolveSnapshotPresenter(): SnapshotInfoViewModel {
+        return SnapshotInfoViewModel(restClient.api, platform.navigationService, platform.uiScheduler)
     }
 
-    fun resolveCreateSubscriptionPresenter(): CreateSubscriptionPresenter {
-        return CreateSubscriptionPresenter(restClient.api, platform.uiScheduler)
+    fun resolveCreateSubscriptionPresenter(): CreateSubscriptionViewModel {
+        return CreateSubscriptionViewModel(restClient.api, platform.uiScheduler)
     }
 
-    fun resolveSubscriptionsPresenter(): SubscriptionsPresenter {
-        return SubscriptionsPresenter(restClient, platform.uiScheduler)
+    fun resolveSubscriptionsPresenter(): SubscriptionsViewModel {
+        return SubscriptionsViewModel(restClient, platform.uiScheduler)
     }
 
-    fun resolveSnapshotsPresenter(): SnapshotsPresenter {
-        return SnapshotsPresenter(restClient.api, platform.navigationService, platform.uiScheduler)
+    fun resolveSnapshotsPresenter(): SnapshotsViewModel {
+        return SnapshotsViewModel(restClient.api, platform.navigationService, platform.uiScheduler)
     }
 
-    fun resolveLoginPresenter(): LoginPresenter {
-        return LoginPresenter(platform.navigationService, platform.uiScheduler, restClient.api)
+    fun resolveLoginPresenter(): LoginViewModel {
+        return LoginViewModel(platform.navigationService, platform.uiScheduler, restClient.api)
     }
 
     interface Platform {

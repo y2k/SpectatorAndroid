@@ -9,7 +9,7 @@ import y2k.spectator.service.RestClient
 /**
  * Created by y2k on 1/3/16.
  */
-class SubscriptionsPresenter(
+class SubscriptionsViewModel(
     private val restClient: RestClient,
     private val uiScheduler: Scheduler) {
 

@@ -10,7 +10,7 @@ import y2k.spectator.service.NavigationService
 /**
  * Created by y2k on 1/2/16.
  */
-class SnapshotsPresenter(
+class SnapshotsViewModel(
     private val api: Api,
     private val navigationService: NavigationService,
     private val uiScheduler: Scheduler) {
@@ -39,6 +39,6 @@ class SnapshotsPresenter(
     }
 
     fun openSnapshot(snapshot: Snapshot) {
-        navigationService.open(SnapshotInfoPresenter::class.java, "" + snapshot.id)
+        navigationService.open(SnapshotInfoViewModel::class.java, "" + snapshot.id)
     }
 }

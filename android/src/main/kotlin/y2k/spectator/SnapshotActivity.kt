@@ -9,15 +9,15 @@ import android.webkit.WebView
 import android.widget.TextView
 import y2k.spectator.common.ViewPagerWrapper
 import y2k.spectator.common.addOnPageChangeListener
-import y2k.spectator.model.Snapshot
-import y2k.spectator.presenter.SnapshotInfoPresenter
+import y2k.spectator.common.bind
+import y2k.spectator.presenter.SnapshotInfoViewModel
 
 /**
  * Created by y2k on 1/17/16.
  */
 class SnapshotActivity : AppCompatActivity() {
 
-    lateinit var presenter: SnapshotInfoPresenter
+    lateinit var viewModel: SnapshotInfoViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,26 +25,16 @@ class SnapshotActivity : AppCompatActivity() {
 
         val titleView = view.findViewById(R.id.title) as TextView
         val updatedView = view.findViewById(R.id.updated)as TextView
-        val contentView = view.findViewById(R.id.contentView) as WebView
-        val diffView = view.findViewById(R.id.diffView) as WebView
 
-        presenter = ServiceLocator.resolveSnapshotPresenter(
-            object : SnapshotInfoPresenter.View {
-                override fun updateInfo(snapshot: Snapshot) {
-                    snapshot.apply {
-                        titleView.text = title
-                        updatedView.text = "Created: $updated"
-                    }
-                }
+        viewModel = ServiceLocator.resolveSnapshotPresenter()
 
-                override fun updateBrowser(data: String, baseUrl: String) {
-                    contentView.loadDataWithBaseURL(baseUrl, data, null, null, null)
-                }
+        (view.findViewById(R.id.contentView) as WebView).bind(viewModel.contentUrl)
+        (view.findViewById(R.id.diffView) as WebView).bind(viewModel.diffUrl)
 
-                override fun updateDiffBrowser(data: String, baseUrl: String) {
-                    diffView.loadDataWithBaseURL(baseUrl, data, null, null, null)
-                }
-            })
+        viewModel.info.subject.subscribe {
+            titleView.text = it.title
+            updatedView.text = "Created: ${it.updated}"
+        }
     }
 
     private fun initializeContentView(): ViewPagerWrapper {
@@ -53,7 +43,7 @@ class SnapshotActivity : AppCompatActivity() {
 
         var wrapper = ViewPagerWrapper(findViewById(R.id.pager) as ViewPager)
         (findViewById(R.id.tabs) as TabLayout).setupWithViewPager(wrapper.pager)
-        wrapper.pager.addOnPageChangeListener { presenter.tabSelected(it) }
+        wrapper.pager.addOnPageChangeListener { viewModel.tabSelected(it) }
 
         return wrapper
     }

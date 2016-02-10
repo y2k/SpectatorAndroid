@@ -8,7 +8,7 @@ import y2k.spectator.service.Api
 /**
  * Created by y2k on 1/3/16.
  */
-class CreateSubscriptionPresenter(
+class CreateSubscriptionViewModel(
     private val api: Api,
     private val uiScheduler: Scheduler) {
 

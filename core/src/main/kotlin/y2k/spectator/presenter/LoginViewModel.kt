@@ -11,7 +11,7 @@ import java.net.URLEncoder
 /**
  * Created by y2k on 1/2/16.
  */
-class LoginPresenter(
+class LoginViewModel(
     private val navigationService: NavigationService,
     private val uiScheduler: Scheduler,
     private val api: Api) {
