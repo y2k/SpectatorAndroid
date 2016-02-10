@@ -1,5 +1,6 @@
 package y2k.spectator.common
 
+import android.app.Activity
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
@@ -28,4 +29,9 @@ fun ViewPager.addOnPageChangeListener(callback: (Int) -> Unit) {
             callback(position)
         }
     })
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> Activity.find(id: Int): T {
+    return findViewById(id) as T
 }
