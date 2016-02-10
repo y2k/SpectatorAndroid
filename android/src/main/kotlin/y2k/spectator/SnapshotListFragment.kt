@@ -23,7 +23,6 @@ class SnapshotListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
-
         val presenter = ServiceLocator.resolveSnapshotsPresenter()
 
         view.findViewById(R.id.add).bind { presenter.add() }
@@ -31,15 +30,13 @@ class SnapshotListFragment : Fragment() {
             bind(presenter.isNeedLogin)
             bind { presenter.login() }
         }
-
-        val myAdapter = Adapter()
         view.find<RecyclerView>(R.id.list).apply {
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = myAdapter
+            adapter = Adapter().apply {
+                bind(presenter.snapshots)
+                clickListener = { presenter.openSnapshot(it) }
+            }
         }
-        myAdapter.bind(presenter.snapshots)
-        myAdapter.clickListener = { presenter.openSnapshot(it) }
-
         return view
     }
 
