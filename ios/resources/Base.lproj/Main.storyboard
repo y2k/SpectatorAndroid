@@ -575,19 +575,22 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Snapshot" rowHeight="300" id="N5Z-No-hbR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Snapshot" rowHeight="300" id="N5Z-No-hbR" customClass="SnapshotViewCell">
                                         <rect key="frame" x="0.0" y="92" width="600" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N5Z-No-hbR" id="xlX-H8-gA5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="299"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5En-DJ-QSc">
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5En-DJ-QSc">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="289"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2yt-9G-CAO">
                                                     <rect key="frame" x="560" y="12" width="30" height="30"/>
                                                     <state key="normal" image="FavoriteOff.png"/>
+                                                    <connections>
+                                                        <action selector="action" destination="N5Z-No-hbR" eventType="touchUpInside" id="Bk7-y9-kWr"/>
+                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ItemShadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fjm-rq-gtV">
                                                     <rect key="frame" x="0.0" y="201" width="600" height="88"/>
@@ -629,6 +632,11 @@
                                                 <constraint firstItem="Fjm-rq-gtV" firstAttribute="leading" secondItem="xlX-H8-gA5" secondAttribute="leading" id="wtZ-iO-z1U"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="date" destination="9dg-ch-7Gb" id="mhG-7D-T6x"/>
+                                            <outlet property="image" destination="5En-DJ-QSc" id="Ri0-YC-z0O"/>
+                                            <outlet property="title" destination="TaH-rP-yd5" id="qUt-Gj-k7v"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

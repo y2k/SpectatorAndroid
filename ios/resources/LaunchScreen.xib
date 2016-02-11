@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,23 +13,34 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="oNT-0U-i1U">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="wii-dV-O5i">
-                    <rect key="frame" x="83" y="128" width="155" height="110"/>
-                </imageView>
-                <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashText.png" translatesAutoresizingMaskIntoConstraints="NO" id="BFp-ZQ-4gJ">
-                    <rect key="frame" x="75" y="247" width="170" height="60"/>
-                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nxu-df-k8W">
+                    <rect key="frame" x="0.0" y="151" width="320" height="179"/>
+                    <subviews>
+                        <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashText.png" translatesAutoresizingMaskIntoConstraints="NO" id="BFp-ZQ-4gJ">
+                            <rect key="frame" x="75" y="119" width="170" height="60"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="wii-dV-O5i">
+                            <rect key="frame" x="83" y="0.0" width="155" height="110"/>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="BFp-ZQ-4gJ" firstAttribute="top" secondItem="wii-dV-O5i" secondAttribute="bottom" constant="9" id="3Ps-6F-12P"/>
+                        <constraint firstItem="wii-dV-O5i" firstAttribute="top" secondItem="Nxu-df-k8W" secondAttribute="top" id="KrV-E9-8Bt"/>
+                        <constraint firstItem="wii-dV-O5i" firstAttribute="centerX" secondItem="Nxu-df-k8W" secondAttribute="centerX" id="bzC-LL-GHX"/>
+                        <constraint firstItem="BFp-ZQ-4gJ" firstAttribute="centerX" secondItem="Nxu-df-k8W" secondAttribute="centerX" id="g0S-2h-ZUV"/>
+                        <constraint firstAttribute="bottom" secondItem="BFp-ZQ-4gJ" secondAttribute="bottom" id="lQS-Oz-xEK"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="oNT-0U-i1U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0GD-PO-O69"/>
-                <constraint firstItem="BFp-ZQ-4gJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1k2-9A-cWJ"/>
+                <constraint firstItem="Nxu-df-k8W" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5YR-DS-9ko"/>
+                <constraint firstAttribute="trailing" secondItem="Nxu-df-k8W" secondAttribute="trailing" id="HFl-Of-szX"/>
                 <constraint firstItem="oNT-0U-i1U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IYu-Ha-WBy"/>
                 <constraint firstAttribute="trailing" secondItem="oNT-0U-i1U" secondAttribute="trailing" id="Irh-Yq-vtC"/>
-                <constraint firstItem="BFp-ZQ-4gJ" firstAttribute="top" secondItem="wii-dV-O5i" secondAttribute="bottom" constant="9" id="Tso-aP-6xF"/>
-                <constraint firstItem="wii-dV-O5i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Wfg-SE-eDJ"/>
+                <constraint firstItem="Nxu-df-k8W" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NYJ-Un-KRK"/>
                 <constraint firstAttribute="bottom" secondItem="oNT-0U-i1U" secondAttribute="bottom" id="XwP-tO-38h"/>
-                <constraint firstItem="wii-dV-O5i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="128" id="v5o-wd-m3R"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
