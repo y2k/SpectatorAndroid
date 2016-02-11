@@ -6,7 +6,6 @@ import com.squareup.okhttp.Response
 import retrofit.GsonConverterFactory
 import retrofit.Retrofit
 import retrofit.RxJavaCallAdapterFactory
-import java.util.*
 
 /**
  * Created by y2k on 1/3/16.
@@ -22,13 +21,13 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
         client.interceptors().add(ReceiveCookieInterceptor())
 
         api = Retrofit.Builder()
-                .client(client)
-                .baseUrl("http://10.0.0.5:5000/api/")
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .validateEagerly()
-                .build()
-                .create(Api::class.java)
+            .client(client)
+            .baseUrl("http://192.168.0.28:5000/api/")
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .validateEagerly()
+            .build()
+            .create(Api::class.java)
     }
 
     private inner class AddCookiesInterceptor : Interceptor {
@@ -46,15 +45,15 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
 
         override fun intercept(chain: Interceptor.Chain): Response? {
             val response = chain.proceed(chain.request())
-            val temp = response.headers("Set-Cookie").toHashSet()
-            cookieStorage.put(temp)
+            val cookie = response.headers("Set-Cookie").toHashSet()
+            if (cookie.isNotEmpty()) cookieStorage.put(cookie)
             return response
         }
     }
 
     interface CookieStorage {
 
-        fun put(cookies: HashSet<String>)
+        fun put(cookies: Set<String>)
 
         fun getAll(): Set<String>
     }

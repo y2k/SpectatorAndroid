@@ -14,7 +14,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        ServiceLocator.platform = object : ServiceLocator.Platform {
+        ServiceLocator.module = object : ServiceLocator.Module {
 
             private val handler = Handler()
             

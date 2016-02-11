@@ -2,6 +2,7 @@ package y2k.spectator
 
 import rx.Scheduler
 import y2k.spectator.presenter.*
+import y2k.spectator.service.Api
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
 import y2k.spectator.service.RestClient
@@ -13,25 +14,27 @@ import kotlin.reflect.KClass
  */
 object ServiceLocator {
 
-    lateinit var platform: Platform
-    private val restClient = RestClient(TestCookeStorage())
     private val types = HashMap<KClass<*>, () -> Any>()
 
-    init {
+    fun initialize(module: ((KClass<*>, () -> Any) -> Unit) -> Unit) {
+        module { type, func -> types[type] = func }
+        var restClient = RestClient(resolve(RestClient.CookieStorage::class))
+
+        register(Api::class) { restClient.api }
         register(SnapshotInfoViewModel::class) {
-            SnapshotInfoViewModel(restClient.api, platform.navigationService, platform.uiScheduler)
+            SnapshotInfoViewModel(resolve(Api::class), resolve(NavigationService::class), resolve(Scheduler::class))
         }
         register(SubscriptionsViewModel::class) {
-            SubscriptionsViewModel(restClient, platform.uiScheduler)
+            SubscriptionsViewModel(restClient, resolve(Scheduler::class))
         }
         register(SnapshotsViewModel::class) {
-            SnapshotsViewModel(restClient.api, platform.navigationService, platform.uiScheduler)
+            SnapshotsViewModel(resolve(Api::class), resolve(NavigationService::class), resolve(Scheduler::class))
         }
         register(LoginViewModel::class) {
-            LoginViewModel(platform.navigationService, platform.uiScheduler, restClient.api)
+            LoginViewModel(resolve(NavigationService::class), resolve(Scheduler::class), resolve(Api::class))
         }
         register(CreateSubscriptionViewModel::class) {
-            CreateSubscriptionViewModel(restClient.api, platform.uiScheduler)
+            CreateSubscriptionViewModel(resolve(Api::class), resolve(Scheduler::class))
         }
     }
 
@@ -43,26 +46,6 @@ object ServiceLocator {
     fun <T : Any> resolve(type: KClass<T>): T = types[type]!!() as T
 
     fun <T> resolveImageService(): ImageService<T> {
-        return ImageService(restClient.api, platform.uiScheduler, platform.decoder)
-    }
-
-    interface Platform {
-
-        val decoder: ImageService.Decoder
-        val uiScheduler: Scheduler
-        val navigationService: NavigationService
-    }
-
-    class TestCookeStorage : RestClient.CookieStorage {
-
-        val storage = HashSet<String>()
-
-        override fun getAll(): Set<String> {
-            synchronized(storage) { return storage.toSet() }
-        }
-
-        override fun put(cookies: HashSet<String>) {
-            synchronized(storage) { storage.addAll(cookies) }
-        }
+        return ImageService(resolve(Api::class), resolve(Scheduler::class), resolve(ImageService.Decoder::class))
     }
 }

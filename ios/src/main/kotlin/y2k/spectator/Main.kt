@@ -9,19 +9,19 @@ import rx.Scheduler
 import rx.schedulers.Schedulers
 import y2k.spectator.common.ImageDecoder
 import y2k.spectator.common.StoryboardNavigationService
+import y2k.spectator.platform.NSUserCookieStorage
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
+import y2k.spectator.service.RestClient
 
 class Main : UIApplicationDelegateAdapter() {
 
     override fun didFinishLaunching(application: UIApplication?, launchOptions: UIApplicationLaunchOptions?): Boolean {
-        ServiceLocator.platform = object : ServiceLocator.Platform {
-            override val decoder: ImageService.Decoder
-                get() = ImageDecoder()
-            override val uiScheduler: Scheduler
-                get() = Schedulers.from { DispatchQueue.getMainQueue().async(it) }
-            override val navigationService: NavigationService
-                get() = StoryboardNavigationService()
+        ServiceLocator.initialize { register ->
+            register(RestClient.CookieStorage::class) { NSUserCookieStorage() }
+            register(ImageService.Decoder::class) { ImageDecoder() }
+            register(Scheduler::class) { Schedulers.from { DispatchQueue.getMainQueue().async(it) } }
+            register(NavigationService::class) { StoryboardNavigationService() }
         }
         return true
     }
