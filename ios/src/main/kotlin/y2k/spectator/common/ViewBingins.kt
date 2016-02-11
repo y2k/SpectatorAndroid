@@ -1,5 +1,7 @@
 package y2k.spectator.common
 
+import org.robovm.apple.foundation.NSURL
+import org.robovm.apple.foundation.NSURLRequest
 import org.robovm.apple.uikit.*
 import y2k.spectator.ServiceLocator
 import y2k.spectator.model.Image
@@ -8,8 +10,18 @@ import y2k.spectator.model.Image
  * Created by y2k on 2/11/16.
  */
 
-fun <T> ListDataSource<T>.bind(binding: Binding<List<T>>) {
-    binding.subject.subscribe { update(it) }
+fun UIWebView.bindUrl(binding: Binding<String>) {
+    binding.subject.subscribe { loadRequest(NSURLRequest(NSURL(it))) }
+    loadRequest(NSURLRequest(NSURL(binding.value))) // TODO:
+}
+
+fun UIWebView.bindTitle(binding: Binding<String>) {
+    delegate = object : UIWebViewDelegateAdapter() {
+
+        override fun didFinishLoad(webView: UIWebView?) {
+            binding.value = evaluateJavaScript("document.title")
+        }
+    }
 }
 
 fun UIView.bind(binding: Binding<Boolean>) {

@@ -4,10 +4,7 @@ import org.robovm.apple.uikit.*
 import org.robovm.objc.annotation.CustomClass
 import org.robovm.objc.annotation.IBAction
 import org.robovm.objc.annotation.IBOutlet
-import y2k.spectator.common.ListCell
-import y2k.spectator.common.SideMenu
-import y2k.spectator.common.bind
-import y2k.spectator.common.formatDate
+import y2k.spectator.common.*
 import y2k.spectator.model.Snapshot
 import y2k.spectator.presenter.SnapshotsViewModel
 
@@ -29,6 +26,7 @@ class MainViewController : UIViewController() {
             .apply {
                 list.bind<Snapshot, SnapshotViewCell>(snapshots)
                 loginButton.bind(isNeedLogin)
+                loginButton.onClick { login() }
             }
     }
 
