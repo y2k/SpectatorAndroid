@@ -6,7 +6,9 @@ import org.robovm.apple.uikit.*
 import org.robovm.objc.annotation.CustomClass
 import org.robovm.objc.annotation.IBAction
 import org.robovm.objc.annotation.IBOutlet
+import y2k.spectator.common.ListDataSource
 import y2k.spectator.common.SideMenu
+import y2k.spectator.common.bind
 import y2k.spectator.model.Snapshot
 import y2k.spectator.presenter.SnapshotsViewModel
 import java.util.*
@@ -22,24 +24,18 @@ class MainViewController : UIViewController() {
 
     override fun viewDidLoad() {
         super.viewDidLoad()
+        val sideMenu = SideMenu(this, "Menu"); sideMenu.attach()
 
-        val sideMenu = SideMenu(this, "Menu")
-        sideMenu.attach()
-
-        val viewModel = ServiceLocator.resolve(SnapshotsViewModel::class)
-
-        val dataSource = SnapshotsDataSource(list)
-        list.dataSource = dataSource
-
-        viewModel.snapshots.subject.subscribe {
-            dataSource.update(it)
-        }
+        ServiceLocator
+            .resolve(SnapshotsViewModel::class)
+            .apply {
+                list.dataSource = SnapshotsDataSource(list).apply { bind(snapshots) }
+                loginButton.bind(isNeedLogin)
+            }
     }
 
-    class SnapshotsDataSource(
-        private val tableView: UITableView) : UITableViewDataSourceAdapter() {
+    class SnapshotsDataSource(tableView: UITableView) : ListDataSource<Snapshot>(tableView) {
 
-        protected val items = ArrayList<Snapshot>()
         val imageService = ServiceLocator.resolveImageService<UIImage>()
         val prettyTime = PrettyTime()
 
@@ -55,16 +51,6 @@ class MainViewController : UIViewController() {
                 .subscribe { cell.image.image = it }
 
             return cell
-        }
-
-        override fun getNumberOfRowsInSection(tableView: UITableView?, section: Long): Long {
-            return items.size.toLong()
-        }
-
-        fun update(items: List<Snapshot>) {
-            this.items.clear()
-            this.items.addAll(items)
-            tableView.reloadData()
         }
     }
 
