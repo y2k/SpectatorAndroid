@@ -22,4 +22,8 @@ class SubscriptionsViewModel(
                 { subscriptions.value = it.subscriptions },
                 { it.printStackTrace() })
     }
+
+    fun logout() {
+        // TODO:
+    }
 }

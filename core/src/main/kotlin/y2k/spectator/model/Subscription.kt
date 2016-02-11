@@ -22,6 +22,9 @@ class Subscription {
     @SerializedName("Thumbnail")
     var thumbnail: Int = 0
 
+    val image: Image
+        get() = Image(thumbnail, 0, 0)
+
     @SerializedName("Title")
     var title: String? = null
 

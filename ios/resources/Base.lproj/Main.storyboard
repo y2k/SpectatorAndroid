@@ -389,7 +389,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="276" height="337"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Subscription" id="4qR-rO-GV0">
+                                            <tableViewCell opaque="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4qR-rO-GV0" customClass="SubscriptionCell">
                                                 <rect key="frame" x="0.0" y="22" width="276" height="55"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4qR-rO-GV0" id="o5w-1c-DMn">
@@ -434,6 +434,11 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="count" destination="dto-Xh-YAX" id="sGt-e7-pia"/>
+                                                    <outlet property="image" destination="XqD-58-I7u" id="L4b-lO-vbw"/>
+                                                    <outlet property="title" destination="DMe-zZ-EkT" id="5zv-fa-8sP"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -575,7 +580,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Snapshot" rowHeight="300" id="N5Z-No-hbR" customClass="SnapshotViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="300" id="N5Z-No-hbR" customClass="SnapshotViewCell">
                                         <rect key="frame" x="0.0" y="92" width="600" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N5Z-No-hbR" id="xlX-H8-gA5">
