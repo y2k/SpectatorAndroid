@@ -1,5 +1,6 @@
 package y2k.spectator.common
 
+import org.robovm.apple.foundation.NSArray
 import org.robovm.apple.uikit.UIApplication
 import org.robovm.apple.uikit.UINavigationController
 import y2k.spectator.service.NavigationService
@@ -10,7 +11,8 @@ import y2k.spectator.service.NavigationService
 class StoryboardNavigationService : NavigationService {
 
     override fun openMain() {
-        throw UnsupportedOperationException()
+        val vc = navigationController.storyboard.instantiateViewController("Main")
+        navigationController.setViewControllers(NSArray(vc), true)
     }
 
     override fun openLogin() {
