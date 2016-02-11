@@ -1,5 +1,6 @@
 package y2k.spectator
 
+import org.ocpsoft.prettytime.PrettyTime
 import org.robovm.apple.foundation.NSIndexPath
 import org.robovm.apple.uikit.*
 import org.robovm.objc.annotation.CustomClass
@@ -40,13 +41,14 @@ class MainViewController : UIViewController() {
 
         protected val items = ArrayList<Snapshot>()
         val imageService = ServiceLocator.resolveImageService<UIImage>()
+        val prettyTime = PrettyTime()
 
         override fun getCellForRow(tableView: UITableView, indexPath: NSIndexPath): UITableViewCell? {
             val cell = tableView.dequeueReusableCell("Snapshot", indexPath) as SnapshotViewCell
             val i = items[indexPath.row]
 
             cell.title.text = i.title
-            cell.date.text = "" + i.updated
+            cell.date.text = prettyTime.format(Date(i.updated))
 
             imageService
                 .get(i.image.normalize(cell.image.frame.width.toInt(), cell.image.frame.height.toInt()))
