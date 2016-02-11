@@ -1,4 +1,4 @@
-package y2k.spectator.common
+package y2k.spectator.platform
 
 import org.robovm.apple.foundation.NSArray
 import org.robovm.apple.uikit.UIApplication

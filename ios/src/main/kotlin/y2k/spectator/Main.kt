@@ -7,8 +7,8 @@ import org.robovm.apple.uikit.UIApplicationDelegateAdapter
 import org.robovm.apple.uikit.UIApplicationLaunchOptions
 import rx.Scheduler
 import rx.schedulers.Schedulers
-import y2k.spectator.common.ImageDecoder
-import y2k.spectator.common.StoryboardNavigationService
+import y2k.spectator.platform.ImageDecoder
+import y2k.spectator.platform.StoryboardNavigationService
 import y2k.spectator.platform.NSUserCookieStorage
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
