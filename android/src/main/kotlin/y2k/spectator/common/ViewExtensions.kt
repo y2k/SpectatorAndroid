@@ -40,3 +40,14 @@ fun <T : View> Activity.find(id: Int): T {
 fun <T : View> View.find(id: Int): T {
     return findViewById(id) as T
 }
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> View.find(id: Int, func: T.() -> Unit): View {
+    (findViewById(id) as T).func()
+    return this
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T : View> Activity.find(id: Int, func: T.() -> Unit) {
+    (findViewById(id) as T).func()
+}

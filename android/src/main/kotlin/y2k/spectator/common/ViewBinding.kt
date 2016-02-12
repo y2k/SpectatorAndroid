@@ -1,5 +1,6 @@
 package y2k.spectator.common
 
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,6 +20,17 @@ fun View.bind(binding: Binding<Boolean>) {
     }
 }
 
+fun Activity.bind(id: Int, binding: Binding<Boolean>) {
+    val view = findViewById(id)
+    binding.subject.subscribe {
+        if (it) view.visibility = View.VISIBLE else view.visibility = View.GONE
+    }
+}
+
+fun Activity.bindEditText(id: Int, binding: Binding<String>) {
+    find<EditText>(id).bind(binding)
+}
+
 fun EditText.bind(binding: Binding<String>) {
     addTextChangedListener(object : TextWatcher {
 
@@ -36,6 +48,15 @@ fun EditText.bind(binding: Binding<String>) {
 
 fun View.bind(command: () -> Unit) = setOnClickListener { command() }
 
+fun View.bind(id: Int, command: () -> Unit): View {
+    findViewById(id).setOnClickListener { command() }
+    return this
+}
+
+fun Activity.bind(id: Int, command: () -> Unit) {
+    findViewById(id).setOnClickListener { command() }
+}
+
 fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
     dataSource.subject.subscribe { update(it) }
 }
@@ -46,7 +67,7 @@ fun WebView.bind(binding: Binding<Page>) {
     }
 }
 
-fun WebView.bindLoadUrl(binding: Binding<String>) {
+fun WebView.bindUrl(binding: Binding<String>) {
     binding.subject.subscribe { loadUrl(it) }
     loadUrl(binding.value) // TODO:
 }

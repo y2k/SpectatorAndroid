@@ -2,9 +2,8 @@ package y2k.spectator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.EditText
 import y2k.spectator.common.bind
-import y2k.spectator.common.find
+import y2k.spectator.common.bindEditText
 import y2k.spectator.presenter.CreateSubscriptionViewModel
 
 /**
@@ -15,12 +14,13 @@ class CreateSubscriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_subscription)
-
-        ServiceLocator.resolve(CreateSubscriptionViewModel::class).apply {
-            findViewById(R.id.create).bind { create() }
-            findViewById(R.id.create).bind(isBusy)
-            find<EditText>(R.id.title).bind(title)
-            find<EditText>(R.id.link).bind(title)
-        }
+        ServiceLocator
+            .resolve(CreateSubscriptionViewModel::class)
+            .apply {
+                bind(R.id.create) { create() }
+                bind(R.id.create, isBusy)
+                bindEditText(R.id.title, title)
+                bindEditText(R.id.link, link)
+            }
     }
 }

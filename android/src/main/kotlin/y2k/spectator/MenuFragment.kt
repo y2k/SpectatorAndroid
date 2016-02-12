@@ -21,13 +21,13 @@ import y2k.spectator.presenter.SubscriptionsViewModel
 class MenuFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_menu, container, false)
         val viewModel = ServiceLocator.resolve(SubscriptionsViewModel::class)
-        view.find<RecyclerView>(R.id.list).apply {
-            layoutManager = LinearLayoutManager(activity)
-            adapter = Adapter().apply { bind(viewModel.subscriptions) }
-        }
-        return view
+        return inflater
+            .inflate(R.layout.fragment_menu, container, false)
+            .find<RecyclerView>(R.id.list) {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = Adapter().apply { bind(viewModel.subscriptions) }
+            }
     }
 
     class Adapter : ListAdapter<Subscription, Adapter.VH>() {

@@ -23,22 +23,21 @@ import y2k.spectator.widget.WebImageView
 class SnapshotListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
         val viewModel = ServiceLocator.resolve(SnapshotsViewModel::class)
-
-        view.findViewById(R.id.add).bind { viewModel.add() }
-        view.findViewById(R.id.login).apply {
-            bind(viewModel.isNeedLogin)
-            bind { viewModel.login() }
-        }
-        view.find<RecyclerView>(R.id.list).apply {
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            adapter = Adapter().apply {
-                bind(viewModel.snapshots)
-                clickListener = { viewModel.openSnapshot(it) }
+        return inflater
+            .inflate(R.layout.fragment_snapshots, container, false)
+            .bind(R.id.add) { viewModel.add() }
+            .find<View>(R.id.login) {
+                bind(viewModel.isNeedLogin)
+                bind { viewModel.login() }
             }
-        }
-        return view
+            .find<RecyclerView>(R.id.list) {
+                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                adapter = Adapter().apply {
+                    bind(viewModel.snapshots)
+                    clickListener = { viewModel.openSnapshot(it) }
+                }
+            }
     }
 
     class Adapter : ListAdapter<Snapshot, Adapter.VH>() {
