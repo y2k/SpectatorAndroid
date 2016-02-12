@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
@@ -46,14 +47,14 @@ fun EditText.bind(binding: Binding<String>) {
     })
 }
 
-fun View.bind(command: () -> Unit) = setOnClickListener { command() }
+fun View.command(command: () -> Unit) = setOnClickListener { command() }
 
-fun View.bind(id: Int, command: () -> Unit): View {
+fun View.command(id: Int, command: () -> Unit): View {
     findViewById(id).setOnClickListener { command() }
     return this
 }
 
-fun Activity.bind(id: Int, command: () -> Unit) {
+fun Activity.command(id: Int, command: () -> Unit) {
     findViewById(id).setOnClickListener { command() }
 }
 
@@ -84,4 +85,46 @@ fun WebView.bindTitle(binding: Binding<String>) {
             return true;
         }
     })
+}
+
+fun <T> RecyclerView.bind(binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
+    val dsl = DslRecyclerView<T>()
+    dsl.f()
+    adapter = dsl.build().apply { binding.subject.subscribe { update(it) } }
+}
+
+class DslRecyclerView<T> {
+
+    private lateinit var createVH: (ViewGroup) -> ListViewHolder<T>
+    private var getItemId: ((T) -> Long)? = null
+
+    fun onGetItemId(getItemId: (T) -> Long) {
+        this.getItemId = getItemId
+    }
+
+    fun onCreateViewHolder(createVH: (ViewGroup) -> ListViewHolder<T>) {
+        this.createVH = createVH
+    }
+
+    fun build(): ListAdapter<T, ListViewHolder<T>> {
+        return object : ListAdapter<T, ListViewHolder<T>>() {
+
+            override fun getItemId(position: Int): Long {
+                return getItemId?.invoke(items[position]) ?: 0L
+            }
+
+            override fun onBindViewHolder(holder: ListViewHolder<T>, position: Int) {
+                holder.update(items[position])
+            }
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder<T>? {
+                return createVH(parent)
+            }
+        }
+    }
+}
+
+abstract class ListViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
+
+    abstract fun update(item: T)
 }

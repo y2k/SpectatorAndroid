@@ -10,6 +10,7 @@ import android.widget.TextView
 import y2k.spectator.common.ViewPagerWrapper
 import y2k.spectator.common.addOnPageChangeListener
 import y2k.spectator.common.bind
+import y2k.spectator.common.command
 import y2k.spectator.presenter.SnapshotInfoViewModel
 
 /**

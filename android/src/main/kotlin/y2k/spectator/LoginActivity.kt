@@ -3,10 +3,7 @@ package y2k.spectator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.webkit.WebView
-import y2k.spectator.common.bind
-import y2k.spectator.common.bindTitle
-import y2k.spectator.common.bindUrl
-import y2k.spectator.common.find
+import y2k.spectator.common.*
 import y2k.spectator.presenter.LoginViewModel
 
 /**

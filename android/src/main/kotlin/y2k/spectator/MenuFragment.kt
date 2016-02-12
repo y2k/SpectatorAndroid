@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import y2k.spectator.common.ListAdapter
+import y2k.spectator.common.ListViewHolder
 import y2k.spectator.common.bind
 import y2k.spectator.common.find
 import y2k.spectator.common.inflate
@@ -26,28 +26,21 @@ class MenuFragment : Fragment() {
             .inflate(R.layout.fragment_menu, container, false)
             .find<RecyclerView>(R.id.list) {
                 layoutManager = LinearLayoutManager(activity)
-                adapter = Adapter().apply { bind(viewModel.subscriptions) }
+                bind(viewModel.subscriptions) {
+                    onGetItemId { it.id.toLong() }
+                    onCreateViewHolder { VH(it.inflate(android.R.layout.simple_list_item_2)) }
+                }
             }
     }
 
-    class Adapter : ListAdapter<Subscription, Adapter.VH>() {
+    class VH(view: View) : ListViewHolder<Subscription>(view) {
 
-        override fun getItemId(position: Int): Long {
-            return items[position].id.toLong()
-        }
+        val titleView = view.find<TextView>(android.R.id.text1)
+        val linkView = view.find<TextView>(android.R.id.text2)
 
-        override fun onCreateViewHolder(parent: ViewGroup, position: Int): VH? {
-            return VH(parent.inflate(android.R.layout.simple_list_item_2))
-        }
-
-        override fun onBindViewHolder(vh: VH, position: Int) {
-            items[position].apply {
-                (vh.itemView.findViewById(android.R.id.text1) as TextView).text = title
-                (vh.itemView.findViewById(android.R.id.text2) as TextView).text = source
-            }
-        }
-
-        class VH(view: View) : RecyclerView.ViewHolder(view) {
+        override fun update(item: Subscription) {
+            titleView.text = item.title
+            linkView.text = item.source
         }
     }
 }

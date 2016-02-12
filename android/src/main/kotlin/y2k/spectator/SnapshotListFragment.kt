@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import y2k.spectator.common.ListAdapter
-import y2k.spectator.common.bind
-import y2k.spectator.common.find
-import y2k.spectator.common.inflate
+import y2k.spectator.common.*
 import y2k.spectator.model.Snapshot
 import y2k.spectator.presenter.SnapshotsViewModel
 import y2k.spectator.widget.FixedAspectPanel
@@ -26,50 +23,35 @@ class SnapshotListFragment : Fragment() {
         val viewModel = ServiceLocator.resolve(SnapshotsViewModel::class)
         return inflater
             .inflate(R.layout.fragment_snapshots, container, false)
-            .bind(R.id.add) { viewModel.add() }
+            .command(R.id.add) { viewModel.add() }
             .find<View>(R.id.login) {
                 bind(viewModel.isNeedLogin)
-                bind { viewModel.login() }
+                command { viewModel.login() }
             }
             .find<RecyclerView>(R.id.list) {
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                adapter = Adapter().apply {
-                    bind(viewModel.snapshots)
-                    clickListener = { viewModel.openSnapshot(it) }
+                bind(viewModel.snapshots) {
+                    onGetItemId { it.id.toLong() }
+                    onCreateViewHolder { parent ->
+                        VH(parent.inflate(R.layout.item_snapshot)).apply {
+                            itemView.command(R.id.card) { viewModel.openSnapshot(adapterPosition) }
+                        }
+                    }
                 }
             }
     }
 
-    class Adapter : ListAdapter<Snapshot, Adapter.VH>() {
+    class VH(view: View) : ListViewHolder<Snapshot>(view) {
 
-        var clickListener: ((Snapshot) -> Unit)? = null
+        val aspectPanel = view.findViewById(R.id.aspectPanel) as FixedAspectPanel
+        val image = view.findViewById(R.id.image) as WebImageView
+        val title = view.findViewById(android.R.id.text1) as TextView
 
-        override fun onBindViewHolder(vh: VH, position: Int) {
-            items[position].apply {
-                val aspect = thumbnailWidth.toFloat() / thumbnailHeight
-                vh.aspectPanel.aspect = aspect
-                vh.image.image = image
-                vh.title.text = title
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH? {
-            return VH(parent.inflate(R.layout.item_snapshot)).apply {
-                itemView.findViewById(R.id.card).setOnClickListener {
-                    clickListener?.invoke(items[adapterPosition])
-                }
-            }
-        }
-
-        override fun getItemId(position: Int): Long {
-            return items[position].id.toLong()
-        }
-
-        class VH(view: View) : RecyclerView.ViewHolder(view) {
-
-            val aspectPanel = view.findViewById(R.id.aspectPanel) as FixedAspectPanel
-            val image = view.findViewById(R.id.image) as WebImageView
-            val title = view.findViewById(android.R.id.text1) as TextView
+        override fun update(item: Snapshot) {
+            val aspect = item.thumbnailWidth.toFloat() / item.thumbnailHeight
+            aspectPanel.aspect = aspect
+            image.image = item.image
+            title.text = item.title
         }
     }
 }

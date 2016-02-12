@@ -22,7 +22,7 @@ class RestClient(private val cookieStorage: RestClient.CookieStorage) {
 
         api = Retrofit.Builder()
             .client(client)
-            .baseUrl("http://192.168.0.28:5000/api/")
+            .baseUrl("http://10.0.0.5:5000/api/")
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .validateEagerly()

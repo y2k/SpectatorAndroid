@@ -1,6 +1,7 @@
 package y2k.spectator.common
 
 import android.support.v7.widget.RecyclerView
+import android.view.ViewGroup
 import java.util.*
 
 /**

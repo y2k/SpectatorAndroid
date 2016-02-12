@@ -38,6 +38,10 @@ class SnapshotsViewModel(
         navigationService.openAddSubscription()
     }
 
+    fun openSnapshot(position: Int) {
+        openSnapshot(snapshots.value[position])
+    }
+
     fun openSnapshot(snapshot: Snapshot) {
         navigationService.open(SnapshotInfoViewModel::class.java, "" + snapshot.id)
     }
