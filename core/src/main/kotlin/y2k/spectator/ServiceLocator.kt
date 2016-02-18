@@ -1,7 +1,7 @@
 package y2k.spectator
 
 import rx.Scheduler
-import y2k.spectator.presenter.*
+import y2k.spectator.viewmodel.*
 import y2k.spectator.service.Api
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService

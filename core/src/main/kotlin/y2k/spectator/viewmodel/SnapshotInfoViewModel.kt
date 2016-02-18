@@ -1,4 +1,4 @@
-package y2k.spectator.presenter
+package y2k.spectator.viewmodel
 
 import rx.Scheduler
 import y2k.spectator.common.binding

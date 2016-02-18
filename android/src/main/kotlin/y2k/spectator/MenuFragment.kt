@@ -13,7 +13,7 @@ import y2k.spectator.common.bind
 import y2k.spectator.common.find
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Subscription
-import y2k.spectator.presenter.SubscriptionsViewModel
+import y2k.spectator.viewmodel.SubscriptionsViewModel
 
 /**
  * Created by y2k on 1/2/16.

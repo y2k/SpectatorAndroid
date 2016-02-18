@@ -6,7 +6,7 @@ import org.robovm.objc.annotation.IBAction
 import org.robovm.objc.annotation.IBOutlet
 import y2k.spectator.common.*
 import y2k.spectator.model.Snapshot
-import y2k.spectator.presenter.SnapshotsViewModel
+import y2k.spectator.viewmodel.SnapshotsViewModel
 
 /**
  * Created by y2k on 10/02/16.

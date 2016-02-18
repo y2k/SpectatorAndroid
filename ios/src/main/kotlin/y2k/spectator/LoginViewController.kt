@@ -6,7 +6,7 @@ import org.robovm.objc.annotation.CustomClass
 import org.robovm.objc.annotation.IBOutlet
 import y2k.spectator.common.bindTitle
 import y2k.spectator.common.bindUrl
-import y2k.spectator.presenter.LoginViewModel
+import y2k.spectator.viewmodel.LoginViewModel
 
 /**
  * Created by y2k on 2/11/16.

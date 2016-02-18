@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import y2k.spectator.common.*
 import y2k.spectator.model.Snapshot
-import y2k.spectator.presenter.SnapshotsViewModel
+import y2k.spectator.viewmodel.SnapshotsViewModel
 import y2k.spectator.widget.FixedAspectPanel
 import y2k.spectator.widget.WebImageView
 

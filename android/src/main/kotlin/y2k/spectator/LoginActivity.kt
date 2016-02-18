@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.webkit.WebView
 import y2k.spectator.common.*
-import y2k.spectator.presenter.LoginViewModel
+import y2k.spectator.viewmodel.LoginViewModel
 
 /**
  * Created by y2k on 1/2/16.

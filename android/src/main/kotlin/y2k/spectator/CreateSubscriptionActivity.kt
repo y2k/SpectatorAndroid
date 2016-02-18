@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import y2k.spectator.common.bind
 import y2k.spectator.common.command
 import y2k.spectator.common.bindEditText
-import y2k.spectator.presenter.CreateSubscriptionViewModel
+import y2k.spectator.viewmodel.CreateSubscriptionViewModel
 
 /**
  * Created by y2k on 1/3/16.
