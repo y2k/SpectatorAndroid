@@ -1,8 +1,8 @@
 package y2k.spectator.service
 
 import com.google.gson.annotations.SerializedName
-import com.squareup.okhttp.ResponseBody
-import retrofit.http.*
+import okhttp3.ResponseBody
+import retrofit2.http.*
 import rx.Observable
 import y2k.spectator.model.Snapshot
 import y2k.spectator.model.Subscription
@@ -31,7 +31,7 @@ interface Api {
 
     @PUT("account")
     @FormUrlEncoded
-    fun login(@Field("code") code: String, @Field("redirectUri") redirectUri: String): Observable<Unit>
+    fun login(@Field("code") code: String, @Field("redirectUri") redirectUri: String): Observable<Void>
 
     @GET("snapshots")
     fun snapshots(): Observable<SnapshotsResponse>

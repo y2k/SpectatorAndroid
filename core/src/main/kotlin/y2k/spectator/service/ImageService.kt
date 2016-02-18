@@ -21,10 +21,13 @@ class ImageService<T>(
         return api
             .images(image.id, image.width, image.height)
             .map { it.bytes() }
-            .map { decoder.decode(it) as T }
+            .map { decode(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(uiScheduler)
     }
+
+    @Suppress("unchecked_cast")
+    private fun decode(bytes: ByteArray) = decoder.decode(bytes) as T
 
     interface Decoder {
 
