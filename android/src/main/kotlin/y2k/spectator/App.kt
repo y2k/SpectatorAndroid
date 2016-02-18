@@ -19,11 +19,11 @@ class App : Application() {
         super.onCreate()
 
         val handler = Handler()
-        ServiceLocator.initialize { register ->
-            register(ImageService.Decoder::class) { BitmapImageDecoder() }
-            register(Scheduler::class) { Schedulers.from { handler.post(it) } }
-            register(NavigationService::class) { AndroidNavigationService(this) }
-            register(RestClient.CookieStorage::class) { SharedPreferencesCookieStorage(this) }
+        ServiceLocator.let {
+            it.register(RestClient.CookieStorage::class, SharedPreferencesCookieStorage(this))
+            it.register(ImageService.Decoder::class, BitmapImageDecoder())
+            it.register(Scheduler::class, Schedulers.from { handler.post(it) })
+            it.register(NavigationService::class, AndroidNavigationService(this))
         }
     }
 }

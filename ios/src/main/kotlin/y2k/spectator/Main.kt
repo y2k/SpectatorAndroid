@@ -8,8 +8,8 @@ import org.robovm.apple.uikit.UIApplicationLaunchOptions
 import rx.Scheduler
 import rx.schedulers.Schedulers
 import y2k.spectator.platform.ImageDecoder
-import y2k.spectator.platform.StoryboardNavigationService
 import y2k.spectator.platform.NSUserCookieStorage
+import y2k.spectator.platform.StoryboardNavigationService
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
 import y2k.spectator.service.RestClient
@@ -17,11 +17,11 @@ import y2k.spectator.service.RestClient
 class Main : UIApplicationDelegateAdapter() {
 
     override fun didFinishLaunching(application: UIApplication?, launchOptions: UIApplicationLaunchOptions?): Boolean {
-        ServiceLocator.initialize { register ->
-            register(RestClient.CookieStorage::class) { NSUserCookieStorage() }
-            register(ImageService.Decoder::class) { ImageDecoder() }
-            register(Scheduler::class) { Schedulers.from { DispatchQueue.getMainQueue().async(it) } }
-            register(NavigationService::class) { StoryboardNavigationService() }
+        ServiceLocator.apply {
+            register(RestClient.CookieStorage::class, NSUserCookieStorage())
+            register(ImageService.Decoder::class, ImageDecoder())
+            register(Scheduler::class, Schedulers.from { DispatchQueue.getMainQueue().async(it) })
+            register(NavigationService::class, StoryboardNavigationService())
         }
         return true
     }

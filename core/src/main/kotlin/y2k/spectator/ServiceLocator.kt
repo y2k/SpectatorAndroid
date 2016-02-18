@@ -16,16 +16,14 @@ object ServiceLocator {
 
     private val types = HashMap<KClass<*>, () -> Any>()
 
-    fun initialize(module: ((KClass<*>, () -> Any) -> Unit) -> Unit) {
-        module { type, func -> types[type] = func }
-        var restClient = RestClient(resolve(RestClient.CookieStorage::class))
-
-        register(Api::class) { restClient.api }
+    init {
+        register(RestClient::class) { RestClient(resolve(RestClient.CookieStorage::class)) }
+        register(Api::class) { resolve(RestClient::class).api }
         register(SnapshotInfoViewModel::class) {
             SnapshotInfoViewModel(resolve(Api::class), resolve(NavigationService::class), resolve(Scheduler::class))
         }
         register(SubscriptionsViewModel::class) {
-            SubscriptionsViewModel(restClient, resolve(Scheduler::class))
+            SubscriptionsViewModel(resolve(RestClient::class), resolve(Scheduler::class))
         }
         register(SnapshotsViewModel::class) {
             SnapshotsViewModel(resolve(Api::class), resolve(NavigationService::class), resolve(Scheduler::class))
@@ -38,13 +36,18 @@ object ServiceLocator {
         }
     }
 
-    private fun <T : Any> register(type: KClass<T>, func: () -> T) {
+    fun <T : Any> register(type: KClass<T>, singleton: T) {
+        types[type] = { singleton }
+    }
+
+    fun <T : Any> register(type: KClass<T>, func: () -> T) {
         types[type] = func
     }
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Any> resolve(type: KClass<T>): T = types[type]!!() as T
 
+    // TODO: Убрать метод
     fun <T> resolveImageService(): ImageService<T> {
         return ImageService(resolve(Api::class), resolve(Scheduler::class), resolve(ImageService.Decoder::class))
     }
