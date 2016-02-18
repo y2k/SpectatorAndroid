@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
+import y2k.spectator.common.ActivityLifecycleCallbacksAdapter
+import y2k.spectator.common.startActivity
 import y2k.spectator.service.NavigationService
 
 /**
@@ -14,7 +16,7 @@ class AndroidNavigationService(app: Application) : NavigationService {
     var context: Activity? = null
 
     init {
-        app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+        app.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacksAdapter() {
 
             override fun onActivityResumed(activity: Activity?) {
                 context = activity
@@ -27,18 +29,6 @@ class AndroidNavigationService(app: Application) : NavigationService {
             override fun onActivityPaused(activity: Activity?) {
                 if (context == activity) context = null
             }
-
-            override fun onActivityStarted(activity: Activity?) {
-            }
-
-            override fun onActivityDestroyed(activity: Activity?) {
-            }
-
-            override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
-            }
-
-            override fun onActivityStopped(activity: Activity?) {
-            }
         })
     }
 
@@ -47,20 +37,20 @@ class AndroidNavigationService(app: Application) : NavigationService {
     }
 
     override fun <T> open(presenter: Class<T>, arg: String?) {
-        context?.startActivity(
-            Intent(context, SnapshotActivity::class.java).putExtra("arg", arg))
+        context?.startActivity(SnapshotActivity::class) { putExtra("arg", arg) }
     }
 
     override fun openLogin() {
-        context?.startActivity(Intent(context, LoginActivity::class.java))
+        context?.startActivity(LoginActivity::class)
     }
 
     override fun openMain() {
-        context?.startActivity(Intent(context, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+        context?.startActivity(MainActivity::class) {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
     }
 
     override fun openAddSubscription() {
-        context?.startActivity(Intent(context, CreateSubscriptionActivity::class.java))
+        context?.startActivity(CreateSubscriptionActivity::class)
     }
 }
