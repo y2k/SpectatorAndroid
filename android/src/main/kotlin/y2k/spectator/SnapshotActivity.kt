@@ -32,7 +32,7 @@ class SnapshotActivity : AppCompatActivity() {
         (view.findViewById(R.id.contentView) as WebView).bind(viewModel.contentUrl)
         (view.findViewById(R.id.diffView) as WebView).bind(viewModel.diffUrl)
 
-        viewModel.info.subject.subscribe {
+        viewModel.info.subscribe {
             titleView.text = it.title
             updatedView.text = "Created: ${it.updated}"
         }

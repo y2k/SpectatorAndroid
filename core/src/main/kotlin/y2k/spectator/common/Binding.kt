@@ -10,10 +10,14 @@ import kotlin.properties.Delegates
 
 class Binding<T>(initValue: T) {
 
-    val subject: Subject<T, T> = PublishSubject.create()
+    private val subject: Subject<T, T> = PublishSubject.create()
 
     var value: T by Delegates.observable(initValue) { prop, old, new ->
         if (new != old) subject.onNext(new)
+    }
+
+    fun subscribe(f: (T) -> Unit) {
+        subject.subscribe(f)
     }
 }
 

@@ -1,6 +1,7 @@
 package y2k.spectator.common
 
 import android.app.Activity
+import android.support.v4.widget.ContentLoadingProgressBar
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,16 +16,22 @@ import y2k.spectator.model.Page
  * Created by y2k on 2/10/16.
  */
 
+fun Activity.bindLoadingProgress(id: Int, binding: Binding<Boolean>) {
+    val view = find<ContentLoadingProgressBar>(id)
+    binding.subscribe { if (it) view.show() else view.hide() }
+}
+
 fun View.bind(binding: Binding<Boolean>) {
-    binding.subject.subscribe {
+    binding.subscribe {
         if (it) visibility = View.VISIBLE else visibility = View.GONE
     }
 }
 
-fun Activity.bind(id: Int, binding: Binding<Boolean>) {
+fun Activity.bind(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
     val view = findViewById(id)
-    binding.subject.subscribe {
-        if (it) view.visibility = View.VISIBLE else view.visibility = View.GONE
+    binding.subscribe {
+        if (invert) view.visibility = if (it) View.VISIBLE else View.GONE
+        else view.visibility = if (it) View.VISIBLE else View.GONE
     }
 }
 
@@ -59,17 +66,17 @@ fun Activity.command(id: Int, command: () -> Unit) {
 }
 
 fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
-    dataSource.subject.subscribe { update(it) }
+    dataSource.subscribe { update(it) }
 }
 
 fun WebView.bind(binding: Binding<Page>) {
-    binding.subject.subscribe {
+    binding.subscribe {
         loadDataWithBaseURL(it.baseUrl, it.data, null, null, null)
     }
 }
 
 fun WebView.bindUrl(binding: Binding<String>) {
-    binding.subject.subscribe { loadUrl(it) }
+    binding.subscribe { loadUrl(it) }
     loadUrl(binding.value) // TODO:
 }
 
@@ -90,7 +97,7 @@ fun WebView.bindTitle(binding: Binding<String>) {
 fun <T> RecyclerView.bind(binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
     val dsl = DslRecyclerView<T>()
     dsl.f()
-    adapter = dsl.build().apply { binding.subject.subscribe { update(it) } }
+    adapter = dsl.build().apply { binding.subscribe { update(it) } }
 }
 
 class DslRecyclerView<T> {

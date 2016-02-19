@@ -28,7 +28,7 @@ class LoginViewModel(
             "&redirect_uri=" + URLEncoder.encode("urn:ietf:wg:oauth:2.0:oob:auto") +
             "&access_type=offline"
 
-        title.subject.subscribe {
+        title.subscribe {
             val code = it.findGroup("code=(.+)") ?: return@subscribe
             isBusy.value = true
             api.login(code, "urn:ietf:wg:oauth:2.0:oob:auto")

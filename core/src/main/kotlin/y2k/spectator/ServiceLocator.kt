@@ -1,11 +1,11 @@
 package y2k.spectator
 
 import rx.Scheduler
-import y2k.spectator.viewmodel.*
 import y2k.spectator.service.Api
 import y2k.spectator.service.ImageService
 import y2k.spectator.service.NavigationService
 import y2k.spectator.service.RestClient
+import y2k.spectator.viewmodel.*
 import java.util.*
 import kotlin.reflect.KClass
 
@@ -32,7 +32,7 @@ object ServiceLocator {
             LoginViewModel(resolve(NavigationService::class), resolve(Scheduler::class), resolve(Api::class))
         }
         register(CreateSubscriptionViewModel::class) {
-            CreateSubscriptionViewModel(resolve(Api::class), resolve(Scheduler::class))
+            CreateSubscriptionViewModel(resolve(Api::class), resolve(Scheduler::class), resolve(NavigationService::class))
         }
     }
 

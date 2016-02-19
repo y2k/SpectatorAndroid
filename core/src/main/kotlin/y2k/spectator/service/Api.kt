@@ -17,14 +17,14 @@ interface Api {
 
     @PUT("subscriptions")
     @FormUrlEncoded
-    fun create(@Field("Source") url: String, @Field("Title") title: String): Observable<Unit>
+    fun create(@Field("Source") url: String, @Field("Title") title: String): Observable<Void>
 
     @POST("subscriptions/{id}")
     @FormUrlEncoded
-    fun edit(@Path("id") id: Int, @Field("Title") title: String): Observable<Unit>
+    fun edit(@Path("id") id: Int, @Field("Title") title: String): Observable<Void>
 
     @DELETE("subscriptions/{id}")
-    fun delete(@Path("id") id: Int): Observable<Unit>
+    fun delete(@Path("id") id: Int): Observable<Void>
 
     @GET("subscriptions")
     fun subscriptions(): Observable<SubscriptionResponse>

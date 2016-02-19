@@ -3,8 +3,9 @@ package y2k.spectator
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import y2k.spectator.common.bind
-import y2k.spectator.common.command
 import y2k.spectator.common.bindEditText
+import y2k.spectator.common.bindLoadingProgress
+import y2k.spectator.common.command
 import y2k.spectator.viewmodel.CreateSubscriptionViewModel
 
 /**
@@ -22,6 +23,7 @@ class CreateSubscriptionActivity : AppCompatActivity() {
                 bind(R.id.create, isBusy)
                 bindEditText(R.id.title, title)
                 bindEditText(R.id.link, link)
+                bindLoadingProgress(R.id.progress, isBusy)
             }
     }
 }
