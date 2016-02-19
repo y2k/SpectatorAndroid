@@ -1,10 +1,7 @@
 package y2k.spectator
 
 import rx.Scheduler
-import y2k.spectator.service.Api
-import y2k.spectator.service.ImageService
-import y2k.spectator.service.NavigationService
-import y2k.spectator.service.RestClient
+import y2k.spectator.service.*
 import y2k.spectator.viewmodel.*
 import java.util.*
 import kotlin.reflect.KClass
@@ -19,6 +16,7 @@ object ServiceLocator {
     init {
         register(RestClient::class) { RestClient(resolve(RestClient.CookieStorage::class)) }
         register(Api::class) { resolve(RestClient::class).api }
+        register(RssService::class) { RssService() }
         register(SnapshotInfoViewModel::class) {
             SnapshotInfoViewModel(resolve(Api::class), resolve(NavigationService::class), resolve(Scheduler::class))
         }
@@ -32,7 +30,11 @@ object ServiceLocator {
             LoginViewModel(resolve(NavigationService::class), resolve(Scheduler::class), resolve(Api::class))
         }
         register(CreateSubscriptionViewModel::class) {
-            CreateSubscriptionViewModel(resolve(Api::class), resolve(Scheduler::class), resolve(NavigationService::class))
+            CreateSubscriptionViewModel(
+                resolve(Api::class),
+                resolve(RssService::class),
+                resolve(Scheduler::class),
+                resolve(NavigationService::class))
         }
     }
 

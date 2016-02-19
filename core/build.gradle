@@ -24,11 +24,11 @@ sourceSets {
 
 dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
-
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
 
+    compile 'org.jsoup:jsoup:1.8.3'
     compile 'org.ocpsoft.prettytime:prettytime:3.2.7.Final'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
