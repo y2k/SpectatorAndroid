@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.TextView
+import y2k.spectator.binding.ListViewHolder
 import y2k.spectator.binding.bindingBuilder
-import y2k.spectator.common.ListViewHolder
-import y2k.spectator.common.command
+import y2k.spectator.binding.command
 import y2k.spectator.common.find
 import y2k.spectator.common.inflate
 import y2k.spectator.model.Subscription
@@ -35,25 +35,6 @@ class CreateSubscriptionActivity : AppCompatActivity() {
                 }
             }
         }
-
-        //        ServiceLocator
-        //            .resolve(CreateSubscriptionViewModel::class)
-        //            .apply {
-        //                command(R.id.analyze) { analyze() }
-        //                editText(R.id.link, link)
-        //
-        //                bind(R.id.analyze, isBusy, true)
-        //                bind(R.id.list, isBusy, true)
-        //                loadingProgress(R.id.progress, isBusy)
-        //
-        //                recyclerView(R.id.list, rssItems) {
-        //                    viewHolder {
-        //                        VH(it.inflate(android.R.layout.simple_list_item_2)).apply {
-        //                            itemView.command { create(adapterPosition) }
-        //                        }
-        //                    }
-        //                }
-        //            }
     }
 
     class VH(view: View) : ListViewHolder<Subscription>(view) {

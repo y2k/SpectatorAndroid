@@ -14,22 +14,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val viewModel = ServiceLocator.resolve(LoginViewModel::class)
-
+        val vm = ServiceLocator.resolve(LoginViewModel::class)
         bindingBuilder(this) {
-            visibility(R.id.progress, viewModel.isBusy)
+            visibility(R.id.progress, vm.isBusy)
             webView(R.id.webView) {
                 settings.javaScriptEnabled = true
-                url(viewModel.url)
-                title(viewModel.title)
+                url(vm.url)
+                title(vm.title)
             }
         }
-
-        //        bind(R.id.progress, viewModel.isBusy)
-        //        find<WebView>(R.id.webView) {
-        //            settings.javaScriptEnabled = true
-        //            bindUrl(viewModel.url)
-        //            bindTitle(viewModel.title)
-        //        }
     }
 }

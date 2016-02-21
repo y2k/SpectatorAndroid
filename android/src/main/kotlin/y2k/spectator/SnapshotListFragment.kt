@@ -2,13 +2,14 @@ package y2k.spectator
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import y2k.spectator.common.*
+import y2k.spectator.binding.ListViewHolder
+import y2k.spectator.binding.bindingBuilder
+import y2k.spectator.binding.command
+import y2k.spectator.common.inflate
 import y2k.spectator.model.Snapshot
 import y2k.spectator.viewmodel.SnapshotsViewModel
 import y2k.spectator.widget.FixedAspectPanel
@@ -20,25 +21,23 @@ import y2k.spectator.widget.WebImageView
 class SnapshotListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val viewModel = ServiceLocator.resolve(SnapshotsViewModel::class)
-        return inflater
-            .inflate(R.layout.fragment_snapshots, container, false)
-            .command(R.id.add) { viewModel.add() }
-            .find<View>(R.id.login) {
-                bind(viewModel.isNeedLogin)
-                command { viewModel.login() }
+        val view = inflater.inflate(R.layout.fragment_snapshots, container, false)
+        val vm = ServiceLocator.resolve(SnapshotsViewModel::class)
+        return bindingBuilder(view) {
+            click(R.id.add, { vm.add() })
+            view(R.id.login) {
+                visibility(vm.isNeedLogin)
+                click({ vm.login() })
             }
-            .find<RecyclerView>(R.id.list) {
-                layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                bind(viewModel.snapshots) {
-                    onGetItemId { it.id.toLong() }
-                    viewHolder { parent ->
-                        VH(parent.inflate(R.layout.item_snapshot)).apply {
-                            itemView.command(R.id.card) { viewModel.openSnapshot(adapterPosition) }
-                        }
+            recyclerView(R.id.list, vm.snapshots) {
+                itemId { it.id.toLong() }
+                viewHolder {
+                    VH(it.inflate(R.layout.item_snapshot)).apply {
+                        itemView.command(R.id.card) { vm.openSnapshot(adapterPosition) }
                     }
                 }
             }
+        }
     }
 
     class VH(view: View) : ListViewHolder<Snapshot>(view) {

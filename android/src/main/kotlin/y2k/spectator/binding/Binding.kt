@@ -2,74 +2,189 @@ package y2k.spectator.binding
 
 import android.app.Activity
 import android.support.v4.view.ViewPager
+import android.support.v4.widget.ContentLoadingProgressBar
+import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.view.View
+import android.view.ViewGroup
 import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.EditText
 import y2k.spectator.common.Binding
-import y2k.spectator.common.DslRecyclerView
+import y2k.spectator.common.ListAdapter
+import y2k.spectator.common.TextWatcherAdapter
+import y2k.spectator.common.find
 import y2k.spectator.model.Page
 
 /**
  * Created by y2k on 2/21/16.
  */
+fun View.command(command: () -> Unit) = setOnClickListener { command() }
+
+fun View.command(id: Int, command: () -> Unit): View {
+    findViewById(id).setOnClickListener { command() }
+    return this
+}
+
+fun bindingBuilder(root: View, init: BindingBuilder.() -> Unit): View {
+    BindingBuilder(ViewGroupResolver(root)).init()
+    return root
+}
 
 fun bindingBuilder(root: ViewResolver, init: BindingBuilder.() -> Unit) {
-    TODO()
+    BindingBuilder(root).init()
 }
 
 fun bindingBuilder(root: Activity, init: BindingBuilder.() -> Unit) {
-    BindingBuilder().init()
+    BindingBuilder(ActivityViewResolver(root)).init()
 }
 
-class BindingBuilder {
+private class ViewGroupResolver(private val view: View) : ViewResolver {
 
-    fun <T> action(binding: Binding<T>, f: (T) -> Unit) {
-        TODO()
+    override fun <T : View> find(id: Int): T {
+        return view.find<T>(id)
+    }
+}
+
+private class ActivityViewResolver(private val activity: Activity) : ViewResolver {
+
+    override fun <T : View> find(id: Int): T {
+        return activity.find<T>(id)
+    }
+}
+
+class BindingBuilder(private val root: ViewResolver) {
+
+    fun view(id: Int, init: ViewBinding.() -> Unit) {
+        ViewBinding(root.find<View>(id)).init()
     }
 
-    fun <T> recyclerView(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
-        TODO()
+    fun click(id: Int, f: () -> Unit) {
+        root.find<View>(id).setOnClickListener { f() }
+    }
+
+    fun <T> action(binding: Binding<T>, f: (T) -> Unit) {
+        binding.subscribe(f)
+    }
+
+    fun <T> recyclerView(id: Int, binding: Binding<List<T>>, init: DslRecyclerView<T>.() -> Unit) {
+        val view = root.find<RecyclerView>(id)
+        val dsl = DslRecyclerView<T>()
+        dsl.init()
+        view.adapter = dsl.build().apply { binding.subscribe { update(it) } }
     }
 
     fun loadingProgress(id: Int, binding: Binding<Boolean>) {
-        TODO()
+        val view = root.find<ContentLoadingProgressBar>(id)
+        binding.subscribe { if (it) view.show() else view.hide() }
     }
 
     fun editText(id: Int, binding: Binding<String>) {
-        TODO()
+        val view = root.find<EditText>(id)
+        view.addTextChangedListener(object : TextWatcherAdapter() {
+
+            override fun afterTextChanged(s: Editable?) {
+                binding.value = "" + s
+            }
+        })
     }
 
     fun visibility(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
-        TODO()
+        val view = root.find<View>(id)
+        binding.subscribe {
+            if (invert) view.visibility = if (it) View.GONE else View.VISIBLE
+            else view.visibility = if (it) View.VISIBLE else View.GONE
+        }
     }
 
-    //    fun url(id: Int, binding: Binding<String>) {
-    //        throw UnsupportedOperationException("not implemented") // FIXME:
-    //    }
-
     fun webView(id: Int, init: WebViewBinding.() -> Unit) {
-        throw UnsupportedOperationException("not implemented") // FIXME:
+        WebViewBinding(root.find<WebView>(id)).init()
     }
 
     fun webView(id: Int, binding: Binding<Page>) {
-        throw UnsupportedOperationException("not implemented") // FIXME:
+        val view = root.find<WebView>(id)
+        binding.subscribe { view.loadDataWithBaseURL(it.baseUrl, it.data, null, null, null) }
     }
 
     fun viewPager(view: ViewPager, binding: Binding<Int>) {
-        TODO()
+        view.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+
+            override fun onPageSelected(position: Int) {
+                binding.value = position
+            }
+        })
     }
 }
 
-class WebViewBinding {
+class DslRecyclerView<T> {
+
+    private lateinit var createVH: (ViewGroup) -> ListViewHolder<T>
+    private var getItemId: ((T) -> Long)? = null
+
+    fun itemId(getItemId: (T) -> Long) {
+        this.getItemId = getItemId
+    }
+
+    fun viewHolder(createVH: (ViewGroup) -> ListViewHolder<T>) {
+        this.createVH = createVH
+    }
+
+    fun build(): ListAdapter<T, ListViewHolder<T>> {
+        return object : ListAdapter<T, ListViewHolder<T>>() {
+
+            override fun getItemId(position: Int): Long {
+                return getItemId?.invoke(items[position]) ?: 0L
+            }
+
+            override fun onBindViewHolder(holder: ListViewHolder<T>, position: Int) {
+                holder.update(items[position])
+            }
+
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder<T>? {
+                return createVH(parent)
+            }
+        }
+    }
+}
+
+abstract class ListViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
+
+    abstract fun update(item: T)
+}
+
+class ViewBinding(private val view: View) {
+
+    fun click(f: () -> Unit) {
+        view.setOnClickListener { f() }
+    }
+
+    fun visibility(binding: Binding<Boolean>) {
+        binding.subscribe { view.visibility = if (it) View.VISIBLE else View.GONE }
+    }
+}
+
+class WebViewBinding(private val webView: WebView) {
 
     val settings: WebSettings
-        get() = TODO()
+        get() = webView.settings
 
     fun url(binding: Binding<String>) {
-        TODO()
+        binding.subscribe { webView.loadUrl(it) }
     }
 
     fun title(binding: Binding<String>) {
-        TODO()
+        webView.setWebViewClient(object : WebViewClient() {
+
+            override fun onPageFinished(view: WebView, url: String?) {
+                binding.value = view.title
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+                view.loadUrl(url)
+                return true;
+            }
+        })
     }
 }
 

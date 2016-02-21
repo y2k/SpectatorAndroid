@@ -32,21 +32,6 @@ class SnapshotActivity : AppCompatActivity() {
                 updatedView.text = "Created: ${it.updated}"
             }
         }
-
-        //        view.pager.addOnPageChangeListener { viewModel.tabSelected(it) }
-        //
-        //        val titleView = view.findViewById(R.id.title) as TextView
-        //        val updatedView = view.findViewById(R.id.updated)as TextView
-        //
-        //        viewModel = ServiceLocator.resolve(SnapshotInfoViewModel::class)
-        //
-        //        (view.findViewById(R.id.contentView) as WebView).bind(viewModel.contentUrl)
-        //        (view.findViewById(R.id.diffView) as WebView).bind(viewModel.diffUrl)
-        //
-        //        viewModel.info.subscribe {
-        //            titleView.text = it.title
-        //            updatedView.text = "Created: ${it.updated}"
-        //        }
     }
 
     private fun initializeContentView(): ViewPagerWrapper {
