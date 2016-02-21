@@ -35,14 +35,14 @@ class CreateSubscriptionViewModel(
             })
     }
 
-    fun create() {
-        isBusy.value = true
-        api.create(link.value, title.value)
-            .subscribe(uiScheduler, {
-                navigationService.openMain()
-            }, {
-                it.printStackTrace()
-                isBusy.value = false
-            })
-    }
+//    fun create() {
+//        isBusy.value = true
+//        api.create(link.value, title.value)
+//            .subscribe(uiScheduler, {
+//                navigationService.openMain()
+//            }, {
+//                it.printStackTrace()
+//                isBusy.value = false
+//            })
+//    }
 }

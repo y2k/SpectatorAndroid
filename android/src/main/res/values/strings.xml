@@ -11,4 +11,5 @@
     <string name="title_for_subscription">Title for subscription</string>
     <string name="snapshot">Snapshot</string>
     <string name="found_on_the_page">Found on the page</string>
+    <string name="analyze">Analyze</string>
 </resources>

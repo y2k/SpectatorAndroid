@@ -8,7 +8,7 @@ import kotlin.properties.Delegates
  * Created by y2k on 2/10/16.
  */
 
-class Binding<T>(initValue: T) {
+class Binding<T>(private val initValue: T) {
 
     private val subject: Subject<T, T> = PublishSubject.create()
 
@@ -18,6 +18,7 @@ class Binding<T>(initValue: T) {
 
     fun subscribe(f: (T) -> Unit) {
         subject.subscribe(f)
+        f(initValue)
     }
 }
 

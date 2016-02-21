@@ -15,6 +15,9 @@ import y2k.spectator.model.Page
 /**
  * Created by y2k on 2/10/16.
  */
+fun <T> Activity.bindList(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
+    find<RecyclerView>(id).bind(binding, f)
+}
 
 fun Activity.bindLoadingProgress(id: Int, binding: Binding<Boolean>) {
     val view = find<ContentLoadingProgressBar>(id)
@@ -30,7 +33,7 @@ fun View.bind(binding: Binding<Boolean>) {
 fun Activity.bind(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
     val view = findViewById(id)
     binding.subscribe {
-        if (invert) view.visibility = if (it) View.VISIBLE else View.GONE
+        if (invert) view.visibility = if (it) View.GONE else View.VISIBLE
         else view.visibility = if (it) View.VISIBLE else View.GONE
     }
 }
