@@ -15,11 +15,11 @@ import y2k.spectator.model.Page
 /**
  * Created by y2k on 2/10/16.
  */
-fun <T> Activity.bindList(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
+fun <T> Activity.recyclerView(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
     find<RecyclerView>(id).bind(binding, f)
 }
 
-fun Activity.bindLoadingProgress(id: Int, binding: Binding<Boolean>) {
+fun Activity.loadingProgress(id: Int, binding: Binding<Boolean>) {
     val view = find<ContentLoadingProgressBar>(id)
     binding.subscribe { if (it) view.show() else view.hide() }
 }
@@ -38,7 +38,7 @@ fun Activity.bind(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
     }
 }
 
-fun Activity.bindEditText(id: Int, binding: Binding<String>) {
+fun Activity.editText(id: Int, binding: Binding<String>) {
     find<EditText>(id).bind(binding)
 }
 
@@ -112,7 +112,7 @@ class DslRecyclerView<T> {
         this.getItemId = getItemId
     }
 
-    fun onCreateViewHolder(createVH: (ViewGroup) -> ListViewHolder<T>) {
+    fun viewHolder(createVH: (ViewGroup) -> ListViewHolder<T>) {
         this.createVH = createVH
     }
 

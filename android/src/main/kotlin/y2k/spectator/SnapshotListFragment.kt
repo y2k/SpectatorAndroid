@@ -32,7 +32,7 @@ class SnapshotListFragment : Fragment() {
                 layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 bind(viewModel.snapshots) {
                     onGetItemId { it.id.toLong() }
-                    onCreateViewHolder { parent ->
+                    viewHolder { parent ->
                         VH(parent.inflate(R.layout.item_snapshot)).apply {
                             itemView.command(R.id.card) { viewModel.openSnapshot(adapterPosition) }
                         }

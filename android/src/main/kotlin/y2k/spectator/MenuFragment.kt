@@ -25,10 +25,9 @@ class MenuFragment : Fragment() {
         return inflater
             .inflate(R.layout.fragment_menu, container, false)
             .find<RecyclerView>(R.id.list) {
-                layoutManager = LinearLayoutManager(activity)
                 bind(viewModel.subscriptions) {
                     onGetItemId { it.id.toLong() }
-                    onCreateViewHolder { VH(it.inflate(android.R.layout.simple_list_item_2)) }
+                    viewHolder { VH(it.inflate(android.R.layout.simple_list_item_2)) }
                 }
             }
     }

@@ -21,13 +21,13 @@ class CreateSubscriptionActivity : AppCompatActivity() {
             .resolve(CreateSubscriptionViewModel::class)
             .apply {
                 command(R.id.analyze) { analyze() }
-                bindEditText(R.id.link, link)
+                editText(R.id.link, link)
 
-                bindLoadingProgress(R.id.progress, isBusy)
                 bind(R.id.analyze, isBusy, true)
+                loadingProgress(R.id.progress, isBusy)
 
-                bindList(R.id.list, rssItems) {
-                    onCreateViewHolder {
+                recyclerView(R.id.list, rssItems) {
+                    viewHolder {
                         VH(it.inflate(android.R.layout.simple_list_item_2))
                     }
                 }
