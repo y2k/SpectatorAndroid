@@ -18,7 +18,6 @@ class CreateSubscriptionViewModel(
     private val navigationService: NavigationService) {
 
     val link = binding("")
-    val title = binding("")
     val isBusy = binding(false)
     val rssItems = binding(emptyList<Subscription>())
 
@@ -35,14 +34,15 @@ class CreateSubscriptionViewModel(
             })
     }
 
-//    fun create() {
-//        isBusy.value = true
-//        api.create(link.value, title.value)
-//            .subscribe(uiScheduler, {
-//                navigationService.openMain()
-//            }, {
-//                it.printStackTrace()
-//                isBusy.value = false
-//            })
-//    }
+    fun create(position: Int) {
+        isBusy.value = true
+        val sub = rssItems.value[position]
+        api.create(sub.source!!, sub.title!!)
+            .subscribe(uiScheduler, {
+                navigationService.openMain()
+            }, {
+                it.printStackTrace()
+                isBusy.value = false
+            })
+    }
 }

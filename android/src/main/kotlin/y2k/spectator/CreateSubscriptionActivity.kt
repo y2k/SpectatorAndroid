@@ -24,11 +24,14 @@ class CreateSubscriptionActivity : AppCompatActivity() {
                 editText(R.id.link, link)
 
                 bind(R.id.analyze, isBusy, true)
+                bind(R.id.list, isBusy, true)
                 loadingProgress(R.id.progress, isBusy)
 
                 recyclerView(R.id.list, rssItems) {
                     viewHolder {
-                        VH(it.inflate(android.R.layout.simple_list_item_2))
+                        VH(it.inflate(android.R.layout.simple_list_item_2)).apply {
+                            itemView.command { create(adapterPosition) }
+                        }
                     }
                 }
             }
