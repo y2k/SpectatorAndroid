@@ -2,8 +2,7 @@ package y2k.spectator
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.webkit.WebView
-import y2k.spectator.common.*
+import y2k.spectator.binding.bindingBuilder
 import y2k.spectator.viewmodel.LoginViewModel
 
 /**
@@ -16,11 +15,21 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         val viewModel = ServiceLocator.resolve(LoginViewModel::class)
-        bind(R.id.progress, viewModel.isBusy)
-        find<WebView>(R.id.webView) {
-            settings.javaScriptEnabled = true
-            bindUrl(viewModel.url)
-            bindTitle(viewModel.title)
+
+        bindingBuilder(this) {
+            visibility(R.id.progress, viewModel.isBusy)
+            webView(R.id.webView) {
+                settings.javaScriptEnabled = true
+                url(viewModel.url)
+                title(viewModel.title)
+            }
         }
+
+        //        bind(R.id.progress, viewModel.isBusy)
+        //        find<WebView>(R.id.webView) {
+        //            settings.javaScriptEnabled = true
+        //            bindUrl(viewModel.url)
+        //            bindTitle(viewModel.title)
+        //        }
     }
 }

@@ -5,11 +5,12 @@ import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
 import y2k.spectator.R
+import y2k.spectator.binding.ViewResolver
 
 /**
  * Created by y2k on 1/18/16.
  */
-class ViewPagerWrapper(val pager: ViewPager) {
+class ViewPagerWrapper(val pager: ViewPager) : ViewResolver {
 
     private var items: List<View>
 
@@ -41,6 +42,11 @@ class ViewPagerWrapper(val pager: ViewPager) {
                 return items.size
             }
         }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : View> find(id: Int): T {
+        return findViewById(id) as T
     }
 
     fun findViewById(id: Int): View? {

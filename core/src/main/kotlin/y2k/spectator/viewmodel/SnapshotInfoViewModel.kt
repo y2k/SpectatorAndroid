@@ -22,6 +22,7 @@ class SnapshotInfoViewModel(
     val info = binding(Snapshot())
     val contentUrl = binding(Page())
     val diffUrl = binding(Page())
+    val page = binding(0)
 
     init {
         snapshotId = navigationService.getArgument()!!
@@ -30,24 +31,23 @@ class SnapshotInfoViewModel(
                 snapshot = it
                 info.value = it
             }
-    }
-
-    fun tabSelected(position: Int) {
-        when (position) {
-            0 -> {
-                contentUrl.value = Page()
-                diffUrl.value = Page()
-            }
-            1 -> {
-                diffUrl.value = Page()
-                api.content(snapshotId).subscribe(uiScheduler) {
-                    contentUrl.value = Page(snapshot!!.source, it.string())
+        page.subscribe {
+            when (it) {
+                0 -> {
+                    contentUrl.value = Page()
+                    diffUrl.value = Page()
                 }
-            }
-            2 -> {
-                contentUrl.value = Page()
-                api.content(snapshotId).subscribe(uiScheduler) {
-                    diffUrl.value = Page(snapshot!!.source, it.string())
+                1 -> {
+                    diffUrl.value = Page()
+                    api.content(snapshotId).subscribe(uiScheduler) {
+                        contentUrl.value = Page(snapshot!!.source, it.string())
+                    }
+                }
+                2 -> {
+                    contentUrl.value = Page()
+                    api.content(snapshotId).subscribe(uiScheduler) {
+                        diffUrl.value = Page(snapshot!!.source, it.string())
+                    }
                 }
             }
         }

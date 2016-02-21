@@ -15,93 +15,93 @@ import y2k.spectator.model.Page
 /**
  * Created by y2k on 2/10/16.
  */
-fun <T> Activity.recyclerView(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
-    find<RecyclerView>(id).bind(binding, f)
-}
-
-fun Activity.loadingProgress(id: Int, binding: Binding<Boolean>) {
-    val view = find<ContentLoadingProgressBar>(id)
-    binding.subscribe { if (it) view.show() else view.hide() }
-}
-
-fun View.bind(binding: Binding<Boolean>) {
-    binding.subscribe {
-        if (it) visibility = View.VISIBLE else visibility = View.GONE
-    }
-}
-
-fun Activity.bind(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
-    val view = findViewById(id)
-    binding.subscribe {
-        if (invert) view.visibility = if (it) View.GONE else View.VISIBLE
-        else view.visibility = if (it) View.VISIBLE else View.GONE
-    }
-}
-
-fun Activity.editText(id: Int, binding: Binding<String>) {
-    find<EditText>(id).bind(binding)
-}
-
-fun EditText.bind(binding: Binding<String>) {
-    addTextChangedListener(object : TextWatcher {
-
-        override fun afterTextChanged(s: Editable?) {
-            binding.value = "" + s
-        }
-
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        }
-    })
-}
+//fun <T> Activity.recyclerView(id: Int, binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
+//    find<RecyclerView>(id).bind(binding, f)
+//}
+//
+//fun Activity.loadingProgress(id: Int, binding: Binding<Boolean>) {
+//    val view = find<ContentLoadingProgressBar>(id)
+//    binding.subscribe { if (it) view.show() else view.hide() }
+//}
+//
+//fun View.bind(binding: Binding<Boolean>) {
+//    binding.subscribe {
+//        if (it) visibility = View.VISIBLE else visibility = View.GONE
+//    }
+//}
+//
+//fun Activity.bind(id: Int, binding: Binding<Boolean>, invert: Boolean = false) {
+//    val view = findViewById(id)
+//    binding.subscribe {
+//        if (invert) view.visibility = if (it) View.GONE else View.VISIBLE
+//        else view.visibility = if (it) View.VISIBLE else View.GONE
+//    }
+//}
+//
+//fun Activity.editText(id: Int, binding: Binding<String>) {
+//    find<EditText>(id).bind(binding)
+//}
+//
+//fun EditText.bind(binding: Binding<String>) {
+//    addTextChangedListener(object : TextWatcher {
+//
+//        override fun afterTextChanged(s: Editable?) {
+//            binding.value = "" + s
+//        }
+//
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//        }
+//
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//        }
+//    })
+//}
 
 fun View.command(command: () -> Unit) = setOnClickListener { command() }
 
-fun View.command(id: Int, command: () -> Unit): View {
-    findViewById(id).setOnClickListener { command() }
-    return this
-}
-
-fun Activity.command(id: Int, command: () -> Unit) {
-    findViewById(id).setOnClickListener { command() }
-}
-
-fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
-    dataSource.subscribe { update(it) }
-}
-
-fun WebView.bind(binding: Binding<Page>) {
-    binding.subscribe {
-        loadDataWithBaseURL(it.baseUrl, it.data, null, null, null)
-    }
-}
-
-fun WebView.bindUrl(binding: Binding<String>) {
-    binding.subscribe { loadUrl(it) }
-    loadUrl(binding.value) // TODO:
-}
-
-fun WebView.bindTitle(binding: Binding<String>) {
-    setWebViewClient(object : WebViewClient() {
-
-        override fun onPageFinished(view: WebView, url: String?) {
-            binding.value = view.title
-        }
-
-        override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
-            view.loadUrl(url)
-            return true;
-        }
-    })
-}
-
-fun <T> RecyclerView.bind(binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
-    val dsl = DslRecyclerView<T>()
-    dsl.f()
-    adapter = dsl.build().apply { binding.subscribe { update(it) } }
-}
+//fun View.command(id: Int, command: () -> Unit): View {
+//    findViewById(id).setOnClickListener { command() }
+//    return this
+//}
+//
+//fun Activity.command(id: Int, command: () -> Unit) {
+//    findViewById(id).setOnClickListener { command() }
+//}
+//
+//fun <T, VH : RecyclerView.ViewHolder> ListAdapter<T, VH>.bind(dataSource: Binding<List<T>>) {
+//    dataSource.subscribe { update(it) }
+//}
+//
+//fun WebView.bind(binding: Binding<Page>) {
+//    binding.subscribe {
+//        loadDataWithBaseURL(it.baseUrl, it.data, null, null, null)
+//    }
+//}
+//
+//fun WebView.bindUrl(binding: Binding<String>) {
+//    binding.subscribe { loadUrl(it) }
+//    loadUrl(binding.value) // TODO:
+//}
+//
+//fun WebView.bindTitle(binding: Binding<String>) {
+//    setWebViewClient(object : WebViewClient() {
+//
+//        override fun onPageFinished(view: WebView, url: String?) {
+//            binding.value = view.title
+//        }
+//
+//        override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+//            view.loadUrl(url)
+//            return true;
+//        }
+//    })
+//}
+//
+//fun <T> RecyclerView.bind(binding: Binding<List<T>>, f: DslRecyclerView<T>.() -> Unit) {
+//    val dsl = DslRecyclerView<T>()
+//    dsl.f()
+//    adapter = dsl.build().apply { binding.subscribe { update(it) } }
+//}
 
 class DslRecyclerView<T> {
 
