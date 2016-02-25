@@ -18,7 +18,7 @@ class Binding<T>(private val initValue: T) {
 
     fun subscribe(f: (T) -> Unit) {
         subject.subscribe(f)
-        f(initValue)
+        f(value)
     }
 }
 
