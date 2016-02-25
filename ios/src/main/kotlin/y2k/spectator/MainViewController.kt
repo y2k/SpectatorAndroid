@@ -21,13 +21,12 @@ class MainViewController : UIViewController() {
         super.viewDidLoad()
         val sideMenu = SideMenu(this, "Menu"); sideMenu.attach()
 
-        ServiceLocator
-            .resolve(SnapshotsViewModel::class)
-            .apply {
-                list.bind<Snapshot, SnapshotViewCell>(snapshots)
-                loginButton.bind(isNeedLogin)
-                loginButton.onClick { login() }
-            }
+        val vm = ServiceLocator.resolve(SnapshotsViewModel::class)
+        bindingBuilder {
+            tableView(list, SnapshotViewCell::class, vm.snapshots)
+            view(loginButton, vm.isNeedLogin)
+            click(loginButton, { vm.login() })
+        }
     }
 
     @CustomClass("SnapshotViewCell")

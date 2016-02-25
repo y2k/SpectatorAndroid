@@ -6,7 +6,7 @@ import org.robovm.objc.annotation.IBAction
 import org.robovm.objc.annotation.IBOutlet
 import y2k.spectator.common.ListCell
 import y2k.spectator.common.bind
-import y2k.spectator.common.onClick
+import y2k.spectator.common.bindingBuilder
 import y2k.spectator.model.Subscription
 import y2k.spectator.viewmodel.SubscriptionsViewModel
 
@@ -23,12 +23,11 @@ class MenuViewController : UIViewController() {
     override fun viewDidLoad() {
         super.viewDidLoad()
 
-        ServiceLocator
-            .resolve(SubscriptionsViewModel::class)
-            .apply {
-                subscriptionList.bind(subscriptions)
-                logoutButton.onClick { logout() }
-            }
+        val vm = ServiceLocator.resolve(SubscriptionsViewModel::class)
+        bindingBuilder {
+            click(logoutButton, { vm.logout() })
+            tableView(subscriptionList, SubscriptionCell::class, vm.subscriptions)
+        }
     }
 
     @CustomClass("SubscriptionCell")
