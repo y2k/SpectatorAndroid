@@ -11,7 +11,7 @@ import y2k.spectator.model.Image
  */
 
 fun UIWebView.bindUrl(binding: Binding<String>) {
-    binding.subject.subscribe { loadRequest(NSURLRequest(NSURL(it))) }
+    binding.subscribe { loadRequest(NSURLRequest(NSURL(it))) }
     loadRequest(NSURLRequest(NSURL(binding.value))) // TODO:
 }
 
@@ -25,7 +25,7 @@ fun UIWebView.bindTitle(binding: Binding<String>) {
 }
 
 fun UIView.bind(binding: Binding<Boolean>) {
-    binding.subject.subscribe { isHidden = !it }
+    binding.subscribe { isHidden = !it }
 }
 
 fun UILabel.bind(text: String) {
@@ -41,6 +41,6 @@ fun UIImageView.bind(image: Image) {
 
 fun <T, TC : ListCell<T>> UITableView.bind(binding: Binding<List<T>>) {
     val source = ListDataSource.Default<T, TC>(this);
-    binding.subject.subscribe { source.update(it) }
+    binding.subscribe { source.update(it) }
     dataSource = source
 }
